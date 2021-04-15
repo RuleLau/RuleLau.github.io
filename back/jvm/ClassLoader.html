@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>类加载 | RuleLau&#39;s Blog</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/icon.jpg">
+    <meta name="description" content="我的个人网站">
+    
+    <link rel="preload" href="/assets/css/0.styles.99ba71c7.css" as="style"><link rel="preload" href="/assets/js/app.bb9919a6.js" as="script"><link rel="preload" href="/assets/js/2.062734e7.js" as="script"><link rel="preload" href="/assets/js/22.a39a912a.js" as="script"><link rel="prefetch" href="/assets/js/10.433b51f5.js"><link rel="prefetch" href="/assets/js/11.830e5532.js"><link rel="prefetch" href="/assets/js/12.85721356.js"><link rel="prefetch" href="/assets/js/13.f8c3fd2d.js"><link rel="prefetch" href="/assets/js/14.fa653c25.js"><link rel="prefetch" href="/assets/js/15.ef76bc62.js"><link rel="prefetch" href="/assets/js/16.2516e7f1.js"><link rel="prefetch" href="/assets/js/17.0a2c827f.js"><link rel="prefetch" href="/assets/js/18.1cc7adc7.js"><link rel="prefetch" href="/assets/js/19.d2b6da04.js"><link rel="prefetch" href="/assets/js/20.fe2514d7.js"><link rel="prefetch" href="/assets/js/21.dd4a8ef6.js"><link rel="prefetch" href="/assets/js/23.bc7d0bf9.js"><link rel="prefetch" href="/assets/js/24.40d7b3be.js"><link rel="prefetch" href="/assets/js/25.f81da329.js"><link rel="prefetch" href="/assets/js/26.d1ffbb37.js"><link rel="prefetch" href="/assets/js/27.f9dbe694.js"><link rel="prefetch" href="/assets/js/28.a5585f32.js"><link rel="prefetch" href="/assets/js/29.fbd97713.js"><link rel="prefetch" href="/assets/js/3.7c25579e.js"><link rel="prefetch" href="/assets/js/30.d633d78f.js"><link rel="prefetch" href="/assets/js/31.ec95955c.js"><link rel="prefetch" href="/assets/js/32.392fbf7d.js"><link rel="prefetch" href="/assets/js/33.eb3725da.js"><link rel="prefetch" href="/assets/js/4.fa3d0d1c.js"><link rel="prefetch" href="/assets/js/5.cb6c276b.js"><link rel="prefetch" href="/assets/js/6.8acca1fd.js"><link rel="prefetch" href="/assets/js/7.fca05378.js"><link rel="prefetch" href="/assets/js/8.84b833b0.js"><link rel="prefetch" href="/assets/js/9.ccd83e3e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.99ba71c7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/icon.jpg" alt="RuleLau's Blog" class="logo"> <span class="site-name can-hide">RuleLau's Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>JVM</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/back/jvm/JMM.html" class="sidebar-link">JVM内存结构</a></li><li><a href="/back/jvm/JVMStructure.html" class="sidebar-link">对象的内存布局</a></li><li><a href="/back/jvm/GCAlgorithm.html" class="sidebar-link">垃圾收集策略与算法</a></li><li><a href="/back/jvm/GC.html" class="sidebar-link">垃圾收集器</a></li><li><a href="/back/jvm/MemoryAllocation.html" class="sidebar-link">内存分配与回收策略</a></li><li><a href="/back/jvm/ClassStructure.html" class="sidebar-link">类文件结构</a></li><li><a href="/back/jvm/ClassLoader.html" aria-current="page" class="active sidebar-link">类加载</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Concurrency</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>ThreadPool</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Design Pattern</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Distributed-Transaction</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Docker</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Utils</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="类加载"><a href="#类加载" class="header-anchor">#</a> 类加载</h3> <h4 id="类加载的时机、过程和类加载器"><a href="#类加载的时机、过程和类加载器" class="header-anchor">#</a> 类加载的时机、过程和类加载器</h4> <h4 id="类的生命周期"><a href="#类的生命周期" class="header-anchor">#</a> 类的生命周期</h4> <p>类从被加载到虚拟机内存开始，到卸载除内存为止，它的整个生命周期包括以下7个阶段：</p> <ul><li>加载</li> <li>验证</li> <li>准备</li> <li>解析</li> <li>初始化</li> <li>使用</li> <li>卸载</li></ul> <p>验证、准备、解析3个阶段统称为连接</p> <p>加载、验证、准备、初始化和卸载这5个阶段的顺序是确定的，类的加载过程必须按照这种顺序执行。而解析阶段不一定，它在某些情况下可以先初始化再开始，这是为了支持Java语言的运行时绑定</p> <h4 id="类加载过程中的-初始化-开始的时机"><a href="#类加载过程中的-初始化-开始的时机" class="header-anchor">#</a> 类加载过程中的“初始化”开始的时机</h4> <p>Java虚拟机规范没有强制约束类加载过程的第一阶段即：加载，什么时候开始</p> <ul><li>在遇到new、putstatic、getstatic、invokestatic字节码指令时，如果类尚未初始化，则需要先触发其初始化</li> <li>对类进行反射调用时，如果类还没有初始化，则需要先触发其初始化</li> <li>初始化一个类时，如果其父类还没有初始化，则需要先初始化父类</li> <li>虚拟机启动时，用于需要指定一个包含main()方法的主类，虚拟机会先初始化这个字类</li> <li>当使用 JDK 1.7 的动态语言支持时，如果一个 java.lang.invoke.MethodHandle 实例最后的解析结果为 REF_getStatic、REF_putStatic、REF_invokeStatic 的方法句柄，并且这个方法句柄所对应的类还没初始化，则需要先触发其初始化。</li></ul> <blockquote><p>这 5 种场景中的行为称为对一个类进行主动引用，除此之外，其它所有引用类的方式都不会触发初始化，称为被动引用。</p></blockquote> <h3 id="类加载的过程"><a href="#类加载的过程" class="header-anchor">#</a> 类加载的过程</h3> <p>类加载的过程包括5个阶段：加载、验证、准备、解析、初始化</p> <h4 id="加载"><a href="#加载" class="header-anchor">#</a> 加载</h4> <h4 id="加载的过程"><a href="#加载的过程" class="header-anchor">#</a> 加载的过程</h4> <p>“加载”是类加载过程的一个阶段，在加载阶段，虚拟机需要完成3件事情：</p> <ul><li>通过类的全限定名获取该类的二进制字节流</li> <li>将二进制字节流所表示的静态结构转化为方法区的运行时数据结构</li> <li>在内存中创建一个代表该类的java.lang.Class对象，作为方法区的这个类的各种数据的访问入口</li></ul> <h4 id="获取二进制字节流"><a href="#获取二进制字节流" class="header-anchor">#</a> 获取二进制字节流</h4> <p>对于class文件，除了直接从编译好的.class文件中读取，还有以下的方式：</p> <ul><li>从zip包中读取，jar、war包等</li> <li>从网络中读取，applet</li> <li>通过动态代理技术生成代理类的二进制字节流</li> <li>由JSP文件生成对应的Class类</li> <li>从数据库读取</li></ul> <h4 id="非数组类-与-数组类-加载比较"><a href="#非数组类-与-数组类-加载比较" class="header-anchor">#</a> “非数组类”与“数组类”加载比较</h4> <ul><li>非数组类的加载阶段可以使用系统提供的引导类加载器，也可以由用户自定义的类加载器完成</li> <li>数组类本身不通过类加载器创建，它是有Java虚拟机直接创建，再由类加载器创建数组中的元素类</li></ul> <h4 id="验证"><a href="#验证" class="header-anchor">#</a> 验证</h4> <p>验证阶段确保Class文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身的安全</p> <h4 id="验证的过程"><a href="#验证的过程" class="header-anchor">#</a> 验证的过程</h4> <ul><li><p>文件格式验证，验证字节流是否符合Class文件格式的规范，并且能被当前版本的虚拟机处理</p> <ul><li>是否以魔数0XCAFEBABE开头</li> <li>主次版本号是否在当前虚拟机处理范围内</li> <li>常量池是否有不被支持的常量类型</li> <li>指向常量的索引值是否指向不存在的常量</li> <li>。。。。</li></ul></li> <li><p>元数据验证，对字节码描述信息进行语义分析</p></li> <li><p>字节码验证</p></li> <li><p>符号引用验证，本阶段发生在解析阶段，确保解析正常执行</p></li></ul> <h4 id="准备"><a href="#准备" class="header-anchor">#</a> 准备</h4> <p>准备阶段是正式为类变量分配内存并设置初始值阶段，这些变量（不包括实例变量）所使用的内存都在方法区中分配
+初始值一般情况下为0，null</p> <h4 id="解析"><a href="#解析" class="header-anchor">#</a> 解析</h4> <p>解析阶段是虚拟机将常量池内的符号引用替换为直接引用的过程</p> <h4 id="初始化"><a href="#初始化" class="header-anchor">#</a> 初始化</h4> <p>初始化阶段是类加载过程的最后一步，是执行类构造器 <code>&lt;clinit&gt;()</code> 方法的过程。
+<code>&lt;clinit&gt;()</code> 方法是由编译器自动收集类中的所有类变量的赋值动作和静态语句块（static {} 块）中的语句合并产生的，编译器收集的顺序是由语句在源文件中出现的顺序所决定的。
+静态语句块中只能访问定义在静态语句块之前的变量，定义在它之后的变量，在前面的静态语句块中可以赋值，但不能访问。如下方代码所示：</p> <div class="language- extra-class"><pre class="language-text"><code>public class Test {
+    static {
+        i = 0;  // 给变量赋值可以正常编译通过
+        System.out.println(i);  // 这句编译器会提示“非法向前引用”
+    }
+    static int i = 1;
+}
+</code></pre></div><p><code>&lt;clinit&gt;()</code> 方法不需要显式调用父类构造器，虚拟机会保证在子类的 <code>&lt;clinit&gt;()</code> 方法执行之前，父类的 <code>&lt;clinit&gt;()</code> 方法已经执行完毕。
+由于父类的 <code>&lt;clinit&gt;()</code> 方法先执行，意味着父类中定义的静态语句块要优先于子类的变量赋值操作。如下方代码所示：</p> <div class="language- extra-class"><pre class="language-text"><code>static class Parent {
+    public static int A = 1;
+    static {
+        A = 2;
+    }
+}
+
+static class Sub extends Parent {
+    public static int B = A;
+}
+
+public static void main(String[] args) {
+    System.out.println(Sub.B); // 输出 2
+}
+</code></pre></div><p><code>&lt;clinit&gt;()</code> 方法不是必需的，如果一个类没有静态语句块，也没有对类变量的赋值操作，那么编译器可以不为这个类生成 <code>&lt;clinit&gt;()</code> 方法。
+接口中不能使用静态代码块，但接口也需要通过 <code>&lt;clinit&gt;()</code> 方法为接口中定义的静态成员变量显式初始化。但接口与类不同，接口的 <code>&lt;clinit&gt;()</code> 方法不需要先执行父类的 <code>&lt;clinit&gt;()</code> 方法，只有当父接口中定义的变量使用时，父接口才会初始化。
+虚拟机会保证一个类的 <code>&lt;clinit&gt;()</code> 方法在多线程环境中被正确加锁、同步。如果多个线程同时去初始化一个类，那么只会有一个线程去执行这个类的 <code>&lt;clinit&gt;()</code> 方法。</p> <h3 id="类加载器"><a href="#类加载器" class="header-anchor">#</a> 类加载器</h3> <h4 id="判断类是否相等"><a href="#判断类是否相等" class="header-anchor">#</a> 判断类是否相等</h4> <p>任意一个类，都由加载它的类加载器和这个类本身一同确立其在 Java 虚拟机中的唯一性，每一个类加载器，都有一个独立的类名称空间。
+因此，比较两个类是否“相等”，只有在这两个类是由同一个类加载器加载的前提下才有意义，否则，即使这两个类来源于同一个 Class 文件，被同一个虚拟机加载，只要加载它们的类加载器不同，那么这两个类就必定不相等。
+这里的“相等”，包括代表类的 Class 对象的 equals() 方法、isInstance() 方法的返回结果，也包括使用 instanceof 关键字做对象所属关系判定等情况。</p> <h4 id="加载器种类"><a href="#加载器种类" class="header-anchor">#</a> 加载器种类</h4> <p>系统提供3种类加载器：</p> <ul><li>启动类加载器：负责将存放在&lt;JAVA_HOME&gt;\lib目录中的，并且能被虚拟机识别的（仅按照文件名识别，如 rt.jar，名字不符合的类库即使放在 lib 目录中也不会被加载）类库加载到虚拟机内存中。</li> <li>扩展类加载器：负责加载&lt;JAVA_HOME&gt;\lib\ext目录中的所有类库，开发者可以直接使用扩展类加载器</li> <li>应用程序类加载器：由于这个类加载器是ClassLoader中的getSystemClassLoader()方法的返回值，所以也叫“系统加载器”。
+它负责加载应用类路径classpath上指定的类库，开发之可直接使用这个类加载器，如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器。</li></ul> <p><img src="https://i.loli.net/2021/01/24/NS4rAZbKPzQmXq7.png" alt="image.png"></p> <blockquote><p>当然，如果有必要，还可以加入自己定义的类加载器。</p></blockquote> <h4 id="双亲委派模型"><a href="#双亲委派模型" class="header-anchor">#</a> 双亲委派模型</h4> <p>双亲委派模型是描述类加载器之间的层次关系。它要求除了顶层的启动类加载器外，其余的类加载器都应当有自己的父类加载器。（父子关系一般不会以继承的关系实现，而是以组合关系来复用父加载器的代码）</p> <h5 id="工作过程"><a href="#工作过程" class="header-anchor">#</a> 工作过程</h5> <p>如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把这个请求委派给父类加载器去完成，每一个层次的类加载器都是如此，因此所有的加载请求最终都应该传送到顶层的启动类加载器中，只有当父加载器反馈自己无法完成这个加载请求（找不到所需的类）时，子加载器才会尝试自己去加载。
+在 java.lang.ClassLoader 中的 loadClass 方法中实现该过程。</p> <h5 id="为什么使用双亲委派模型"><a href="#为什么使用双亲委派模型" class="header-anchor">#</a> 为什么使用双亲委派模型</h5> <p>像 java.lang.Object 这些存放在 rt.jar 中的类，无论使用哪个类加载器加载，最终都会委派给最顶端的启动类加载器加载，从而使得不同加载器加载的 Object 类都是同一个。
+相反，如果没有使用双亲委派模型，由各个类加载器自行去加载的话，如果用户自己编写了一个称为 java.lang.Object 的类，并放在 classpath 下，那么系统将会出现多个不同的 Object 类，Java 类型体系中最基础的行为也就无法保证。</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2021/1/29 上午7:42:17</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/back/jvm/ClassStructure.html" class="prev">
+        类文件结构
+      </a></span> <span class="next"><a href="/back/concurrency/Volatile.html">
+        volatile
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.bb9919a6.js" defer></script><script src="/assets/js/2.062734e7.js" defer></script><script src="/assets/js/22.a39a912a.js" defer></script>
+  </body>
+</html>

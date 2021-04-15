@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>ThreadPool - 分析-上 | RuleLau&#39;s Blog</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/icon.jpg">
+    <meta name="description" content="我的个人网站">
+    
+    <link rel="preload" href="/assets/css/0.styles.99ba71c7.css" as="style"><link rel="preload" href="/assets/js/app.bb9919a6.js" as="script"><link rel="preload" href="/assets/js/2.062734e7.js" as="script"><link rel="preload" href="/assets/js/30.d633d78f.js" as="script"><link rel="prefetch" href="/assets/js/10.433b51f5.js"><link rel="prefetch" href="/assets/js/11.830e5532.js"><link rel="prefetch" href="/assets/js/12.85721356.js"><link rel="prefetch" href="/assets/js/13.f8c3fd2d.js"><link rel="prefetch" href="/assets/js/14.fa653c25.js"><link rel="prefetch" href="/assets/js/15.ef76bc62.js"><link rel="prefetch" href="/assets/js/16.2516e7f1.js"><link rel="prefetch" href="/assets/js/17.0a2c827f.js"><link rel="prefetch" href="/assets/js/18.1cc7adc7.js"><link rel="prefetch" href="/assets/js/19.d2b6da04.js"><link rel="prefetch" href="/assets/js/20.fe2514d7.js"><link rel="prefetch" href="/assets/js/21.dd4a8ef6.js"><link rel="prefetch" href="/assets/js/22.a39a912a.js"><link rel="prefetch" href="/assets/js/23.bc7d0bf9.js"><link rel="prefetch" href="/assets/js/24.40d7b3be.js"><link rel="prefetch" href="/assets/js/25.f81da329.js"><link rel="prefetch" href="/assets/js/26.d1ffbb37.js"><link rel="prefetch" href="/assets/js/27.f9dbe694.js"><link rel="prefetch" href="/assets/js/28.a5585f32.js"><link rel="prefetch" href="/assets/js/29.fbd97713.js"><link rel="prefetch" href="/assets/js/3.7c25579e.js"><link rel="prefetch" href="/assets/js/31.ec95955c.js"><link rel="prefetch" href="/assets/js/32.392fbf7d.js"><link rel="prefetch" href="/assets/js/33.eb3725da.js"><link rel="prefetch" href="/assets/js/4.fa3d0d1c.js"><link rel="prefetch" href="/assets/js/5.cb6c276b.js"><link rel="prefetch" href="/assets/js/6.8acca1fd.js"><link rel="prefetch" href="/assets/js/7.fca05378.js"><link rel="prefetch" href="/assets/js/8.84b833b0.js"><link rel="prefetch" href="/assets/js/9.ccd83e3e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.99ba71c7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/icon.jpg" alt="RuleLau's Blog" class="logo"> <span class="site-name can-hide">RuleLau's Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>JVM</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Concurrency</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>ThreadPool</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/back/threadPool/Executors.html" class="sidebar-link">Executors</a></li><li><a href="/back/threadPool/ThreadPool01.html" aria-current="page" class="active sidebar-link">ThreadPool - 分析-上</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/back/threadPool/ThreadPool02.html" class="sidebar-link">ThreadPool - 分析-下</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Design Pattern</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Distributed-Transaction</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Docker</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Utils</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="threadpool-分析-上"><a href="#threadpool-分析-上" class="header-anchor">#</a> ThreadPool - 分析-上</h3> <h4 id="介绍"><a href="#介绍" class="header-anchor">#</a> 介绍</h4> <p>线程池上一篇文章已经简单介绍了线程池，那么这一篇就深入了解线程池的实现机制</p> <p>简单看下线程池的结构图：</p> <p><img src="https://i.loli.net/2021/01/26/YDaAW7OVbyFItUe.png" alt="image.png"></p> <p>ThreadPoolExecutor继承了 AbstractExecutorService， AbstractExecutorService 实现了 ExecutorService 接口，
+ExecutorService 继承了 Executor 接口</p> <ul><li><p>Executor 接口只定义了简单的方法，需要执行的具体任务的方法，也是最重要的方法</p> <div class="language- extra-class"><pre class="language-text"><code>/**
+   执行给定的任务，这个任务可能执行在一个新的线程、一个线程池或者是回调的线程
+ * Executes the given command at some time in the future.  The command
+ * may execute in a new thread, in a pooled thread, or in the calling
+ * thread, at the discretion of the {@code Executor} implementation.
+ * 
+ * @param command the runnable task
+ * @throws RejectedExecutionException if this task cannot be
+ * accepted for execution
+ * @throws NullPointerException if command is null
+ */
+void execute(Runnable command);
+</code></pre></div></li> <li><p>ExecutorService 丰富了关于线程任务的其他方法，例如等待终止，是否终止、提交等</p> <ul><li><p><code>T invokeAny(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks, long timeout, TimeUnit unit)</code></p> <p>只有其中的一个任务结束了，就可以返回，返回执行完的那个任务的结果</p></li> <li><p><code>List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks, long timeout, TimeUnit unit)</code></p> <p>执行所有任务，返回 Future 类型的一个 list</p></li> <li><p><code>Future&lt;T&gt; submit(Runnable task, T result);</code></p> <p>提交一个 Runnable 任务，第二个参数将会放到 Future 中，作为返回值</p></li> <li><p><code>boolean awaitTermination(long timeout, TimeUnit unit)</code></p></li> <li><p><code>boolean isShutdown();</code></p> <p>线程池是否已关闭</p></li> <li><p><code>List&lt;Runnable&gt; shutdownNow();</code></p> <p>关闭线程池，尝试停止正在执行的所有任务，不接受继续提交新任务</p></li> <li><p>。。。</p></li></ul></li> <li><p>AbstractExecutorService 抽象类，将实现的接口 ExecutorService 中的方法进行大体的结构的实现，但是具体的
+方法 execute() 方法 则交给自己的子类去实现，这是典型的模板设计模式</p> <div class="language-$xslt extra-class"><pre class="language-text"><code>//提交一个 Callable 任务
+public &lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task) {
+    if (task == null) throw new NullPointerException();
+    将任务包装成 FutureTask
+    RunnableFuture&lt;T&gt; ftask = newTaskFor(task);
+    // 子类实现
+    execute(ftask);
+    return ftask;
+}
+</code></pre></div></li></ul> <h4 id="abstractexecutorservice-的分析"><a href="#abstractexecutorservice-的分析" class="header-anchor">#</a> AbstractExecutorService 的分析</h4> <p>上面说了 AbstractExecutorService 是个抽象类，负责实现父类的方法，那么来看下具体的实现方法</p> <ul><li><code>RunnableFuture&lt;T&gt; newTaskFor(Runnable runnable, T value)</code>：RunnableFuture 是用于获取执行结果的，我们常用它的子类 FutureTask</li> <li><code>RunnableFuture&lt;T&gt; newTaskFor(Callable&lt;T&gt; callable)</code>： 这两个 newTaskFor 方法用于将我们的任务包装成 FutureTask 提交到线程池中执行</li></ul> <p>下面深入分析两个方法：invokeAny() 和 invokeAll()</p> <ul><li><code>T doInvokeAny(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks, boolean timed, long nanos)</code>: 将 tasks 集合中的任务提交到线程池执行，任意一个线程执行完后就可以结束了
+第二个参数 timed 代表是否设置超时机制，超时时间为第三个参数，如果 timed 为 true，同时超时了还没有一个线程返回结果，那么抛出 TimeoutException 异常</li></ul> <div class="language- extra-class"><pre class="language-text"><code>private &lt;T&gt; T doInvokeAny(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks,
+                            boolean timed, long nanos)
+        throws InterruptedException, ExecutionException, TimeoutException {
+        if (tasks == null)
+            throw new NullPointerException();
+        // 任务数
+        int ntasks = tasks.size();
+        if (ntasks == 0)
+            throw new IllegalArgumentException();
+        //
+        List&lt;Future&lt;T&gt;&gt; futures= new ArrayList&lt;Future&lt;T&gt;&gt;(ntasks);
+ 
+        // ExecutorCompletionService 不是一个真正的执行器，参数 this 才是真正的执行器
+        // 它对执行器进行了包装，每个任务结束后，将结果保存到内部的一个 completionQueue 队列中
+        // 这也是为什么这个类的名字里面有个 Completion 的原因吧。
+        ExecutorCompletionService&lt;T&gt; ecs =
+            new ExecutorCompletionService&lt;T&gt;(this);
+        try {
+            // 用于保存异常信息，此方法如果没有得到任何有效的结果，那么我们可以抛出最后得到的一个异常
+            ExecutionException ee = null;
+            long lastTime = timed ? System.nanoTime() : 0;
+            Iterator&lt;? extends Callable&lt;T&gt;&gt; it = tasks.iterator();
+
+
+            // 首先先提交一个任务，后面的任务到下面的 for 循环一个个提交
+            futures.add(ecs.submit(it.next()));
+            // 提交了一个任务，所以任务数量减 1
+            --ntasks;
+            // 正在执行的任务数(提交的时候 +1，任务结束的时候 -1)
+            int active = 1;
+            for (;;) {
+                // ecs 上面说了，其内部有一个 completionQueue 用于保存执行完成的结果
+                // BlockingQueue 的 poll 方法不阻塞，返回 null 代表队列为空
+                Future&lt;T&gt; f = ecs.poll();
+                // 为 null，说明刚刚提交的第一个线程还没有执行完成
+                // 在前面先提交一个任务，加上这里做一次检查，也是为了提高性能
+                if (f == null) {
+                    if (ntasks &gt; 0) {
+                        --ntasks;
+                        futures.add(ecs.submit(it.next()));
+                        ++active;
+                    }
+                    // 这里是 else if，不是 if。这里说明，没有任务了，同时 active 为 0 说明
+                    // 这里的 active == 0，说明所有的任务都执行失败，那么这里是 for 循环出口
+                    else if (active == 0)
+                        break;
+                    // 这里也是 else if。这里说的是，没有任务了，但是设置了超时时间，这里检测是否超时
+                    else if (timed) {
+                        // 带等待的 poll 方法
+                        f = ecs.poll(nanos, TimeUnit.NANOSECONDS);
+                        // 如果已经超时，抛出 TimeoutException 异常，这整个方法就结束了
+                        if (f == null)
+                            throw new TimeoutException();
+                        long now = System.nanoTime();
+                        nanos -= now - lastTime;
+                        lastTime = now;
+                    }
+                    // 这里是 else。说明，没有任务需要提交，但是池中的任务没有完成，还没有超时(如果设置了超时)
+                    // take() 方法会阻塞，直到有元素返回，说明有任务结束了
+                    else
+                        f = ecs.take();
+                }
+                /*
+                 * 我感觉上面这一段并不是很好理解，这里简单说下。
+                 * 1. 首先，这在一个 for 循环中，我们设想每一个任务都没那么快结束，
+                 *     那么，每一次都会进到第一个分支，进行提交任务，直到将所有的任务都提交了
+                 * 2. 任务都提交完成后，如果设置了超时，那么 for 循环其实进入了“一直检测是否超时”
+                       这件事情上
+                 * 3. 如果没有设置超时机制，那么不必要检测超时，那就会阻塞在 ecs.take() 方法上，
+                       等待获取第一个执行结果
+                 * 4. 如果所有的任务都执行失败，也就是说 future 都返回了，
+                       但是 f.get() 抛出异常，那么从 active == 0 分支出去(感谢 newmicro 提出)
+                         // 当然，这个需要看下面的 if 分支。
+                 */
+                // 有任务结束了
+                if (f != null) {
+                    --active;
+                    try {
+                        // 返回执行结果，如果有异常，都包装成 ExecutionException
+                        return f.get();
+                    } catch (ExecutionException eex) {
+                        ee = eex;
+                    } catch (RuntimeException rex) {
+                        ee = new ExecutionException(rex);
+                    }
+                }
+            }// 注意看 for 循环的范围，一直到这里
+            if (ee == null)
+                ee = new ExecutionException();
+            throw ee;
+        } finally {
+            // 方法退出之前，取消其他的任务
+            for (Future&lt;T&gt; f : futures)
+                f.cancel(true);
+        }
+    }
+</code></pre></div><ul><li><code>List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)</code>: 执行所有的任务，返回任务结果</li></ul> <div class="language- extra-class"><pre class="language-text"><code>public &lt;T&gt; List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks)
+        throws InterruptedException {
+        if (tasks == null)
+            throw new NullPointerException();
+        List&lt;Future&lt;T&gt;&gt; futures = new ArrayList&lt;Future&lt;T&gt;&gt;(tasks.size());
+        boolean done = false;
+        try {
+            // 这个很简单
+            for (Callable&lt;T&gt; t : tasks) {
+                // 包装成 FutureTask
+                RunnableFuture&lt;T&gt; f = newTaskFor(t);
+                futures.add(f);
+                // 提交任务
+                execute(f);
+            }
+            for (Future&lt;T&gt; f : futures) {
+                if (!f.isDone()) {
+                    try {
+                        // 这是一个阻塞方法，直到获取到值，或抛出了异常
+                        // 这里有个小细节，其实 get 方法签名上是会抛出 InterruptedException 的
+                        // 可是这里没有进行处理，而是抛给外层去了。此异常发生于还没执行完的任务被取消了
+                        f.get();
+                    } catch (CancellationException ignore) {
+                    } catch (ExecutionException ignore) {
+                    }
+                }
+            }
+            done = true;
+            // 这个方法返回，不像其他的场景，返回 List&lt;Future&gt;，其实执行结果还没出来
+            // 这个方法返回是真正的返回，任务都结束了
+            return futures;
+        } finally {
+            // 为什么要这个？就是上面说的有异常的情况
+            if (!done)
+                for (Future&lt;T&gt; f : futures)
+                    f.cancel(true);
+        }
+    }
+</code></pre></div><blockquote><p>至于 <code>List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;? extends Callable&lt;T&gt;&gt; tasks, long timeout, TimeUnit unit)</code>： 带有是否超时的参数，
+就是在每一次执行完任务后，都会去计算是否超时，如果超时就返回任务集合</p></blockquote> <h4 id="线程池核心方法"><a href="#线程池核心方法" class="header-anchor">#</a> 线程池核心方法</h4> <p>上面介绍了 AbstractExecutorService 抽象类的两个方法，具体的实现 execute() 就是交给线程池去执行，接下来分析线程池</p> <ul><li><p>构造方法： 构造线程池的参数，这都和执行 execute() 方法有关</p> <div class="language- extra-class"><pre class="language-text"><code> public ThreadPoolExecutor(int corePoolSize, // 核心线程池数
+                               int maximumPoolSize, // 最大线程池数
+                               long keepAliveTime, //  空闲线程的活跃时间
+                               TimeUnit unit, // keepAliveTime 的时间单位
+                               BlockingQueue&lt;Runnable&gt; workQueue, // 阻塞队列也是线程池的工作队列
+                               ThreadFactory threadFactory, // 用于生成线程
+                               RejectedExecutionHandler handler// 拒绝策略，用户自定义实现，默认是抛出异常) {
+         if (corePoolSize &lt; 0 ||
+             maximumPoolSize &lt;= 0 ||
+             maximumPoolSize &lt; corePoolSize ||
+             keepAliveTime &lt; 0)
+             throw new IllegalArgumentException();
+         if (workQueue == null || threadFactory == null || handler == null)
+             throw new NullPointerException();
+         this.acc = System.getSecurityManager() == null ?
+                 null :
+                 AccessController.getContext();
+         this.corePoolSize = corePoolSize;
+         this.maximumPoolSize = maximumPoolSize;
+         this.workQueue = workQueue;
+         this.keepAliveTime = unit.toNanos(keepAliveTime);
+         this.threadFactory = threadFactory;
+         this.handler = handler;
+ }
+</code></pre></div><p>上述的构造方法中的参数，具体的含义分别解释下：</p> <ul><li>corePoolSize：核心线程池的大小，是工作队列活跃的最小值</li> <li>maximumPoolSize：最大线程池数量</li> <li>keepAliveTime：当线程空闲时间达到keepAliveTime时，线程会退出（关闭），直到线程数等于核心线程数；
+如果设置了allowCoreThreadTimeout=true，则线程会退出直到线程数等于零。</li> <li>unit：keepAliveTime 的时间单位</li> <li>workQueue：工作队列，用于在执行task之前保存task</li> <li>threadFactory：构造线程的工厂，默认是 Executors.defaultThreadFactory()</li> <li>handler：当达到了线程边界和队列容量，无法及时处理时，reject task使用的处理策略</li></ul></li> <li><p>execute() 方法解析</p> <div class="language- extra-class"><pre class="language-text"><code>public void execute(Runnable command) {
+    if (command == null)
+        throw new NullPointerException();
+
+    // 这个是表示 “线程池状态” 和 “线程数” 的整数，状态是前三位，线程数是后29位
+    int c = ctl.get();
+
+    // 如果当前线程数少于核心线程数，那么直接添加一个 worker 来执行任务，
+    // 创建一个新的线程，并把当前任务 command 作为这个线程的第一个任(firstTask)
+    if (workerCountOf(c) &lt; corePoolSize) {
+        // 添加任务成功，那么就结束了。提交任务嘛，线程池已经接受了这个任务，这个方法也就可以返回了
+        // 至于执行的结果，到时候会包装到 FutureTask 中。
+        // 返回 false 代表线程池不允许提交任务
+        if (addWorker(command, true))
+            return;
+        c = ctl.get();
+    }
+    // 到这里说明，要么当前线程数大于等于核心线程数，或者刚刚 addWorker 失败了
+    // 如果线程池处于 RUNNING 状态，把这个任务添加到任务队列 workQueue 中
+    if (isRunning(c) &amp;&amp; workQueue.offer(command)) {
+        /* 这里面说的是，如果任务进入了 workQueue，我们是否需要开启新的线程
+         * 因为线程数在 [0, corePoolSize) 是无条件开启新的线程
+         * 如果线程数已经大于等于 corePoolSize，那么将任务添加到队列中，然后进到这里
+         */
+        int recheck = ctl.get();
+        // 如果线程池已不处于 RUNNING 状态，那么移除已经入队的这个任务，并且执行拒绝策略
+        if (! isRunning(recheck) &amp;&amp; remove(command))
+            reject(command);
+        // 如果线程池还是 RUNNING 的，并且线程数为 0，那么开启新的线程
+        // 到这里，我们知道了，这块代码的真正意图是：担心任务提交到队列中了，但是线程都关闭了
+        // addWorker(null, false)：提交的 command 为null，然后直接从队列头部获取任务执行
+        else if (workerCountOf(recheck) == 0)
+            addWorker(null, false);
+    }
+    // 如果 workQueue 队列满了，那么进入到这个分支
+    // 以 maximumPoolSize 为界创建新的 worker，
+    // 如果失败，说明当前线程数已经达到 maximumPoolSize，执行拒绝策略
+    else if (!addWorker(command, false))
+        reject(command);
+}
+</code></pre></div></li></ul></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2021/1/28 下午8:41:14</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/back/threadPool/Executors.html" class="prev">
+        Executors
+      </a></span> <span class="next"><a href="/back/threadPool/ThreadPool02.html">
+        ThreadPool - 分析-下
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.bb9919a6.js" defer></script><script src="/assets/js/2.062734e7.js" defer></script><script src="/assets/js/30.d633d78f.js" defer></script>
+  </body>
+</html>

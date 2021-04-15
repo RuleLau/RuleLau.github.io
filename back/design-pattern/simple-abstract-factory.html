@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>简单工厂+抽象工厂模式 | RuleLau&#39;s Blog</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/icon.jpg">
+    <meta name="description" content="我的个人网站">
+    
+    <link rel="preload" href="/assets/css/0.styles.99ba71c7.css" as="style"><link rel="preload" href="/assets/js/app.bb9919a6.js" as="script"><link rel="preload" href="/assets/js/2.062734e7.js" as="script"><link rel="preload" href="/assets/js/16.2516e7f1.js" as="script"><link rel="prefetch" href="/assets/js/10.433b51f5.js"><link rel="prefetch" href="/assets/js/11.830e5532.js"><link rel="prefetch" href="/assets/js/12.85721356.js"><link rel="prefetch" href="/assets/js/13.f8c3fd2d.js"><link rel="prefetch" href="/assets/js/14.fa653c25.js"><link rel="prefetch" href="/assets/js/15.ef76bc62.js"><link rel="prefetch" href="/assets/js/17.0a2c827f.js"><link rel="prefetch" href="/assets/js/18.1cc7adc7.js"><link rel="prefetch" href="/assets/js/19.d2b6da04.js"><link rel="prefetch" href="/assets/js/20.fe2514d7.js"><link rel="prefetch" href="/assets/js/21.dd4a8ef6.js"><link rel="prefetch" href="/assets/js/22.a39a912a.js"><link rel="prefetch" href="/assets/js/23.bc7d0bf9.js"><link rel="prefetch" href="/assets/js/24.40d7b3be.js"><link rel="prefetch" href="/assets/js/25.f81da329.js"><link rel="prefetch" href="/assets/js/26.d1ffbb37.js"><link rel="prefetch" href="/assets/js/27.f9dbe694.js"><link rel="prefetch" href="/assets/js/28.a5585f32.js"><link rel="prefetch" href="/assets/js/29.fbd97713.js"><link rel="prefetch" href="/assets/js/3.7c25579e.js"><link rel="prefetch" href="/assets/js/30.d633d78f.js"><link rel="prefetch" href="/assets/js/31.ec95955c.js"><link rel="prefetch" href="/assets/js/32.392fbf7d.js"><link rel="prefetch" href="/assets/js/33.eb3725da.js"><link rel="prefetch" href="/assets/js/4.fa3d0d1c.js"><link rel="prefetch" href="/assets/js/5.cb6c276b.js"><link rel="prefetch" href="/assets/js/6.8acca1fd.js"><link rel="prefetch" href="/assets/js/7.fca05378.js"><link rel="prefetch" href="/assets/js/8.84b833b0.js"><link rel="prefetch" href="/assets/js/9.ccd83e3e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.99ba71c7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/icon.jpg" alt="RuleLau's Blog" class="logo"> <span class="site-name can-hide">RuleLau's Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>JVM</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Concurrency</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>ThreadPool</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Design Pattern</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/back/design-pattern/abstract-factory.html" class="sidebar-link">抽象工厂模式</a></li><li><a href="/back/design-pattern/simple-factory.html" class="sidebar-link">简单工厂模式</a></li><li><a href="/back/design-pattern/factory-method.html" class="sidebar-link">工厂方法模式</a></li><li><a href="/back/design-pattern/simple-abstract-factory.html" aria-current="page" class="active sidebar-link">简单工厂+抽象工厂模式</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Distributed-Transaction</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Docker</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Utils</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="简单工厂-抽象工厂模式"><a href="#简单工厂-抽象工厂模式" class="header-anchor">#</a> 简单工厂+抽象工厂模式</h3> <h4 id="定义"><a href="#定义" class="header-anchor">#</a> 定义</h4> <p>该模式主要是用来解决抽象工厂模式代码冗余的部分，取消掉抽象工厂接口和具体工厂类，使用简单工厂模式，在SimpleFactory中，根据给定的条件选择创建具体产品</p> <h4 id="结构"><a href="#结构" class="header-anchor">#</a> 结构</h4> <p><img src="https://i.loli.net/2021/02/12/3M4qJGinaQpx9ST.png" alt="image.png"></p> <h4 id="具体实现"><a href="#具体实现" class="header-anchor">#</a> 具体实现</h4> <p>通过SimpleFactory（简单工厂类）可以看出，每次构造产品，都需要指定factoryName，否则无法判断选择哪一个工厂进行生产</p> <ul><li>SimpleFactory（简单工厂类）</li></ul> <div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 手机简单工厂
+* @author: rule
+* @date: 2019-07-21 18:48
+**/
+public class PhoneSimpleFactory {
+    private static final String factoryName = &quot;apple&quot;;
+    public ISmartPhone createPhone() {
+        ISmartPhone smartPhone = null;
+        switch (factoryName) {
+            case &quot;apple&quot;:
+                smartPhone = new ApplePhone();
+                break;
+            case &quot;samsung&quot;:
+                smartPhone = new SamsungPhone();
+                break;
+        }
+        return smartPhone;
+    }
+
+    public IChip createChip() {
+        IChip chip = null;
+        switch (factoryName) {
+            case &quot;apple&quot;:
+                chip = new AppleChip();
+                break;
+            case &quot;samsung&quot;:
+                chip = new SamsungChip();
+                break;
+        }
+        return chip;
+    }
+}
+</code></pre></div><ul><li><p>AbstractProduct接口（智能手机和芯片接口）</p></li> <li><p>具体工厂类（BasketBallFactory、FootBallFactory和VolleyBallFactory）</p></li></ul> <div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 智能手机接口
+* @author: rule
+* @date: 2019-07-20 21:43
+**/
+public interface ISmartPhone {
+
+    /**
+     * 展示最新手机
+     */
+    void showNewestPhone();
+}
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 芯片接口
+* @author: rule
+* @date: 2019-07-20 21:57
+**/
+public interface IChip {
+
+    /**
+     * 展示最新芯片
+     */
+    void showNewestChip();
+}
+</code></pre></div><ul><li>ConcreteProduct实现类（苹果手机、芯片和三星手机和芯片实现类）</li></ul> <div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 苹果智能手机
+* @author: rule
+* @date: 2019-07-20 21:44
+**/
+public class ApplePhone implements ISmartPhone {
+    @Override
+    public void showNewestPhone() {
+        System.out.println(&quot;苹果今年最新的手机是IphoneX1&quot;);
+    }
+}
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 苹果芯片
+* @author: rule
+* @date: 2019-07-20 21:58
+**/
+public class AppleChip implements IChip {
+    @Override
+    public void showNewestChip() {
+        System.out.println(&quot;苹果今年最新的芯片是A12X&quot;);
+    }
+}
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 三星智能手机类
+* @author: rule
+* @date: 2019-07-20 21:44
+**/
+public class SamsungPhone implements ISmartPhone {
+
+   @Override
+   public void showNewestPhone() {
+       System.out.println(&quot;三星今年最新的手机是SamsungS10&quot;);
+   }
+}
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 三星芯片
+* @author: rule
+* @date: 2019-07-20 21:58
+**/
+public class SamsungChip implements IChip {
+
+   @Override
+   public void showNewestChip() {
+       System.out.println(&quot;三星今年最新的芯片是晓龙855&quot;);
+   }
+}
+</code></pre></div><h4 id="简单-抽象测试类"><a href="#简单-抽象测试类" class="header-anchor">#</a> 简单+抽象测试类</h4> <div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 简单+抽象工厂测试类
+* @author: rule
+* @date: 2019-07-21 18:55
+**/
+public class SimpleAbstractTest {
+    public static void main(String[] args) {
+        PhoneSimpleFactory simpleFactory = new PhoneSimpleFactory();
+        ISmartPhone smartPhone = simpleFactory.createPhone();
+        smartPhone.showNewestPhone();
+    }
+}
+</code></pre></div><p><img src="https://i.loli.net/2021/02/12/qLwNTJbYAgVpzG1.png" alt="image.png"></p> <h4 id="优缺点"><a href="#优缺点" class="header-anchor">#</a> 优缺点</h4> <ul><li>优点：</li></ul> <ol><li>减少了抽象工厂和具体工厂之间的代码。</li> <li>选择简单工厂模式来管理，如果新增产品的情况下，只需要改变SimpleFactory类即可，不需要像原来一样修改多个类。</li></ol> <ul><li>缺点：</li></ul> <ol><li>在简单工厂类中需要进行判断，才能得出需要创建那个工厂，需要修改factoryName才行。</li> <li>不符合“ 开放-封闭”原则。</li></ol> <h4 id="改进-反射"><a href="#改进-反射" class="header-anchor">#</a> 改进（反射）</h4> <ul><li>config.xml（工厂配置文件）</li></ul> <div class="language- extra-class"><pre class="language-text"><code>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;config&gt;
+    &lt;className&gt;com.rule.factory.proimpl.SamsungPhone&lt;/className&gt;
+&lt;/config&gt;
+</code></pre></div><ul><li>ReflectFactory（反射工厂类）</li></ul> <div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 手机反射工厂
+* @author: rule
+* @date: 2019-07-21 19:37
+**/
+public class PhoneReflectFactory {
+
+    public static Object getBean() {
+        try {
+            //创建文档对象
+            DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = dFactory.newDocumentBuilder();
+            Document doc;
+            doc = builder.parse(new File(&quot;simple-abstract-pattern/src/resources/config.xml&quot;));
+            //获取包含类名的文本节点
+            NodeList nl = doc.getElementsByTagName(&quot;className&quot;);
+            Node classNode = nl.item(0).getFirstChild();
+            String cName = classNode.getNodeValue();
+            //通过类名生成实例对象并将其返回
+            Class c = Class.forName(cName);
+            Object obj = c.newInstance();
+            return obj;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ISmartPhone createPhone() {
+        ISmartPhone smartPhone = null;
+        smartPhone = (ISmartPhone) getBean();
+        return smartPhone;
+    }
+
+    public IChip createChip() {
+        IChip chip = null;
+        chip = (IChip) getBean();
+        return chip;
+    }
+}
+</code></pre></div><ul><li>SimpleAbstractTest（简单抽象测试类）</li></ul> <div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 简单+抽象工厂测试类
+* @author: rule
+* @date: 2019-07-21 18:55
+**/
+public class SimpleAbstractTest {
+
+    public static void main(String[] args) {
+        PhoneSimpleFactory simpleFactory = new PhoneSimpleFactory();
+        ISmartPhone smartPhone = simpleFactory.createPhone();
+        smartPhone.showNewestPhone();
+        System.out.println(&quot;======下面使用反射创建工厂=======&quot;);
+        PhoneReflectFactory reflectFactory = new PhoneReflectFactory();
+        reflectFactory.createPhone().showNewestPhone();
+    }
+}
+</code></pre></div><blockquote><p>使用反射解决了简单工厂模式每次新增产品时，都需要添加switch-case的条件，基本做到了“开放-封闭”的设计原则，但是这种方法比较复杂，需要对反射有一定的了解和解析xml文件才能实现</p></blockquote></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2021/2/12 下午12:58:44</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/back/design-pattern/factory-method.html" class="prev">
+        工厂方法模式
+      </a></span> <span class="next"><a href="/back/distributed-transaction/Transaction.html">
+        分布式事务原理及解决方案
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.bb9919a6.js" defer></script><script src="/assets/js/2.062734e7.js" defer></script><script src="/assets/js/16.2516e7f1.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>类文件结构 | RuleLau&#39;s Blog</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/icon.jpg">
+    <meta name="description" content="我的个人网站">
+    
+    <link rel="preload" href="/assets/css/0.styles.99ba71c7.css" as="style"><link rel="preload" href="/assets/js/app.bb9919a6.js" as="script"><link rel="preload" href="/assets/js/2.062734e7.js" as="script"><link rel="preload" href="/assets/js/23.bc7d0bf9.js" as="script"><link rel="prefetch" href="/assets/js/10.433b51f5.js"><link rel="prefetch" href="/assets/js/11.830e5532.js"><link rel="prefetch" href="/assets/js/12.85721356.js"><link rel="prefetch" href="/assets/js/13.f8c3fd2d.js"><link rel="prefetch" href="/assets/js/14.fa653c25.js"><link rel="prefetch" href="/assets/js/15.ef76bc62.js"><link rel="prefetch" href="/assets/js/16.2516e7f1.js"><link rel="prefetch" href="/assets/js/17.0a2c827f.js"><link rel="prefetch" href="/assets/js/18.1cc7adc7.js"><link rel="prefetch" href="/assets/js/19.d2b6da04.js"><link rel="prefetch" href="/assets/js/20.fe2514d7.js"><link rel="prefetch" href="/assets/js/21.dd4a8ef6.js"><link rel="prefetch" href="/assets/js/22.a39a912a.js"><link rel="prefetch" href="/assets/js/24.40d7b3be.js"><link rel="prefetch" href="/assets/js/25.f81da329.js"><link rel="prefetch" href="/assets/js/26.d1ffbb37.js"><link rel="prefetch" href="/assets/js/27.f9dbe694.js"><link rel="prefetch" href="/assets/js/28.a5585f32.js"><link rel="prefetch" href="/assets/js/29.fbd97713.js"><link rel="prefetch" href="/assets/js/3.7c25579e.js"><link rel="prefetch" href="/assets/js/30.d633d78f.js"><link rel="prefetch" href="/assets/js/31.ec95955c.js"><link rel="prefetch" href="/assets/js/32.392fbf7d.js"><link rel="prefetch" href="/assets/js/33.eb3725da.js"><link rel="prefetch" href="/assets/js/4.fa3d0d1c.js"><link rel="prefetch" href="/assets/js/5.cb6c276b.js"><link rel="prefetch" href="/assets/js/6.8acca1fd.js"><link rel="prefetch" href="/assets/js/7.fca05378.js"><link rel="prefetch" href="/assets/js/8.84b833b0.js"><link rel="prefetch" href="/assets/js/9.ccd83e3e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.99ba71c7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/icon.jpg" alt="RuleLau's Blog" class="logo"> <span class="site-name can-hide">RuleLau's Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>JVM</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/back/jvm/JMM.html" class="sidebar-link">JVM内存结构</a></li><li><a href="/back/jvm/JVMStructure.html" class="sidebar-link">对象的内存布局</a></li><li><a href="/back/jvm/GCAlgorithm.html" class="sidebar-link">垃圾收集策略与算法</a></li><li><a href="/back/jvm/GC.html" class="sidebar-link">垃圾收集器</a></li><li><a href="/back/jvm/MemoryAllocation.html" class="sidebar-link">内存分配与回收策略</a></li><li><a href="/back/jvm/ClassStructure.html" aria-current="page" class="active sidebar-link">类文件结构</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/back/jvm/ClassLoader.html" class="sidebar-link">类加载</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Concurrency</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>ThreadPool</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Design Pattern</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Distributed-Transaction</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Docker</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Utils</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="类文件结构"><a href="#类文件结构" class="header-anchor">#</a> 类文件结构</h3> <h4 id="jvm的无关性"><a href="#jvm的无关性" class="header-anchor">#</a> JVM的无关性</h4> <ul><li>平台无关性：任何操作系统都能运行Java代码</li> <li>语言无关性：JVM能运行除Java以外的其他代码</li></ul> <p>Java 源代码首先需要使用 Javac 编译器编译成 .class 文件，然后由 JVM 执行 .class 文件，从而程序开始运行。</p> <h4 id="class文件结构"><a href="#class文件结构" class="header-anchor">#</a> Class文件结构</h4> <p>Class 文件是二进制文件，它的内容具有严格的规范，文件中没有任何空格，全都是连续的 0/1。Class 文件 中的所有内容被分为两种类型：无符号数、表。</p> <ul><li>无符号数：表示Class文件中的值，这些值没有任何类型，但是有不同的长度。u1、u2、u3、u4分别表示1/2/4/8个字节</li> <li>表：由多个无符号数或者其他表作为数据项构成的复合数据类型</li></ul> <p>Class文件具体由其他几个构成：</p> <ul><li><p>魔数
+Class 文件的头 4 个字节称为魔数，用来表示这个 Class 文件的类型。
+Class 文件的魔数是用 16 进制表示的“CAFE BABE”</p></li> <li><p>版本信息
+紧接着魔数的 4 个字节是版本信息，5-6 字节表示次版本号，7-8 字节表示主版本号，它们表示当前 Class 文件中使用的是哪个版本的 JDK。
+高版本的 JDK 能向下兼容以前版本的 Class 文件，但不能运行以后版本的 Class 文件，即使文件格式并未发生任何变化，虚拟机也必需拒绝执行超过其版本号的 Class 文件。</p></li> <li><p>常量池
+版本信息之后就是常量池，常量池中存放两种类型的常量：</p> <ul><li>字面值常量
+字面值常量就是我们在程序中定义的字符串、被 final 修饰的值。</li> <li>符号引用
+符号引用就是我们定义的各种名字：类和接口的全限定名、字段的名字和描述符、方法的名字和描述符。</li></ul></li> <li><p>访问标志
+在常量池结束之后，紧接着的两个字节代表访问标志，这个标志用于识别一些类或者接口层次的访问信息，包括：这个 Class 是类还是接口；是否定义为 public 类型；是否被 abstract/final 修饰</p></li> <li><p>类索引、父类索引、接口索引集合
+类索引和父类索引都是一个 u2 类型的数据，而接口索引集合是一组 u2 类型的数据的集合，Class 文件中由这三项数据来确定类的继承关系。类索引用于确定这个类的全限定名，父类索引用于确定这个类的父类的全限定名。</p></li> <li><p>字段表集合
+字段表集合存储本类涉及到的成员变量，包括实例变量和类变量，但不包括方法中的局部变量。
+每一个字段表只表示一个成员变量，本类中的所有成员变量构成了字段表集合</p></li> <li><p>方法表集合</p></li></ul> <p>方法表结构与属性表类似。
+volatile 关键字 和 transient关键字不能修饰方法，所以方法表的访问标志中没有ACC_VOLATILE和ACC_TRANSIENT 标志。
+方法表的属性表集合中有一张 Code 属性表，用于存储当前方法经编译器编译后的字节码指令。</p> <ul><li>属性表集合</li></ul> <table><thead><tr><th>类型</th> <th>名称</th> <th>数量</th></tr></thead> <tbody><tr><td>u2</td> <td>attribute_name_index</td> <td>1</td></tr> <tr><td>u4</td> <td>attribute_length</td> <td>1</td></tr> <tr><td>u1</td> <td>info</td> <td>attribute_length</td></tr></tbody></table></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2021/1/29 上午7:42:17</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/back/jvm/MemoryAllocation.html" class="prev">
+        内存分配与回收策略
+      </a></span> <span class="next"><a href="/back/jvm/ClassLoader.html">
+        类加载
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.bb9919a6.js" defer></script><script src="/assets/js/2.062734e7.js" defer></script><script src="/assets/js/23.bc7d0bf9.js" defer></script>
+  </body>
+</html>

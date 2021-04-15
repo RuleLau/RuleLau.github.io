@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Executors | RuleLau&#39;s Blog</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/icon.jpg">
+    <meta name="description" content="我的个人网站">
+    
+    <link rel="preload" href="/assets/css/0.styles.99ba71c7.css" as="style"><link rel="preload" href="/assets/js/app.bb9919a6.js" as="script"><link rel="preload" href="/assets/js/2.062734e7.js" as="script"><link rel="preload" href="/assets/js/29.fbd97713.js" as="script"><link rel="prefetch" href="/assets/js/10.433b51f5.js"><link rel="prefetch" href="/assets/js/11.830e5532.js"><link rel="prefetch" href="/assets/js/12.85721356.js"><link rel="prefetch" href="/assets/js/13.f8c3fd2d.js"><link rel="prefetch" href="/assets/js/14.fa653c25.js"><link rel="prefetch" href="/assets/js/15.ef76bc62.js"><link rel="prefetch" href="/assets/js/16.2516e7f1.js"><link rel="prefetch" href="/assets/js/17.0a2c827f.js"><link rel="prefetch" href="/assets/js/18.1cc7adc7.js"><link rel="prefetch" href="/assets/js/19.d2b6da04.js"><link rel="prefetch" href="/assets/js/20.fe2514d7.js"><link rel="prefetch" href="/assets/js/21.dd4a8ef6.js"><link rel="prefetch" href="/assets/js/22.a39a912a.js"><link rel="prefetch" href="/assets/js/23.bc7d0bf9.js"><link rel="prefetch" href="/assets/js/24.40d7b3be.js"><link rel="prefetch" href="/assets/js/25.f81da329.js"><link rel="prefetch" href="/assets/js/26.d1ffbb37.js"><link rel="prefetch" href="/assets/js/27.f9dbe694.js"><link rel="prefetch" href="/assets/js/28.a5585f32.js"><link rel="prefetch" href="/assets/js/3.7c25579e.js"><link rel="prefetch" href="/assets/js/30.d633d78f.js"><link rel="prefetch" href="/assets/js/31.ec95955c.js"><link rel="prefetch" href="/assets/js/32.392fbf7d.js"><link rel="prefetch" href="/assets/js/33.eb3725da.js"><link rel="prefetch" href="/assets/js/4.fa3d0d1c.js"><link rel="prefetch" href="/assets/js/5.cb6c276b.js"><link rel="prefetch" href="/assets/js/6.8acca1fd.js"><link rel="prefetch" href="/assets/js/7.fca05378.js"><link rel="prefetch" href="/assets/js/8.84b833b0.js"><link rel="prefetch" href="/assets/js/9.ccd83e3e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.99ba71c7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/icon.jpg" alt="RuleLau's Blog" class="logo"> <span class="site-name can-hide">RuleLau's Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>JVM</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Concurrency</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>ThreadPool</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/back/threadPool/Executors.html" aria-current="page" class="active sidebar-link">Executors</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/back/threadPool/ThreadPool01.html" class="sidebar-link">ThreadPool - 分析-上</a></li><li><a href="/back/threadPool/ThreadPool02.html" class="sidebar-link">ThreadPool - 分析-下</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Design Pattern</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Distributed-Transaction</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Docker</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Utils</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="executors"><a href="#executors" class="header-anchor">#</a> Executors</h3> <h4 id="介绍"><a href="#介绍" class="header-anchor">#</a> 介绍</h4> <p>ExecutorService继承于Executor接口，他提供了更为丰富的线程实现方法，比如ExecutorService提供关闭自己的方法，以及为跟踪一个或多个异步任务执行状况而生成Future的方法。
+ExecutorService有三种状态：运行、关闭、终止。创建后便进入运行状态，当调用了shutdown()方法时，便进入了关闭状态，此时意味着ExecutorService不再接受新的任务，
+但是他还是会执行已经提交的任务，当所有已经提交了的任务执行完后，便达到终止状态。如果不调用shutdown方法，ExecutorService方法会一直运行下去，系统一般不会主动关闭。</p> <h4 id="常用方法"><a href="#常用方法" class="header-anchor">#</a> 常用方法</h4> <p>Executors提供了工厂的方法来创建线程池，返回的线程池都实现了ExecutorService接口。</p> <ul><li><p>public static ExecutorService newFixedThreadPool(int n）
+创建固定数目的线程的线程池。newFixedThreadPool于cacheThreadPool差不多。也是能reuse就用，但是不能随时创建新的线程；
+任意时间点，只能够最多有固定的数目的线程存在，此时如果有新的线程的创建，只能放在等待队列中，只有当线程池中的一些线程终止被扔出线程池后，才进入线程池进行运行。
+和cacheThreadPool不同，FixedThreadPool没有IDLE机制，所以FixedThreadPool多数针对于很稳定的线程开发，多用于服务器。
+fixedThreadPool和cacheThreadPool一样，同用一个底层池，只不过参数不同，fix线程固定，并且是0sIDLE无IDLE；cache线程支持0-Integer.MAX_VALUE,60s的IDLE。</p></li> <li><p>public static ExecutorService newCacheThreadPool()
+创建一个可缓存池，调用execute将重用以前构造的线程(如果能够使用的话)。如果没有线程可用，那么创建一个线程到线程池中。终止并移除线程池中超过60s没有被使用过的线程。
+缓存池一般用于运行生存期很短的异步线程任务。
+放入cacheThreadPool中的线程不用担心其结束，超时后会被自动终止。
+缺省值timeout=60s</p></li> <li><p>public static ExecutorService newSingleThreadExecutor()
+创建一个单线程化的Executor。
+用的是和cache和fixed池子相同的底层池，无IDLE。</p></li> <li><p>public static ScheduleExecutorService newScheduleThreadPool(int corePoolSize)
+创建一个支持定时及周期性的任务执行的线程池，多数情况可以代替Timer类。Timer存在以下缺陷
+Timer类不管启动多少定时器，但它只会启动一条线程，当有多个定时任务时，就会产生延迟。如：我们要求一个任务每隔3S执行，且执行大约需要10S，第二个任务每隔5S执行，两个任务同时启动。
+若使用Timer我们会发现，第而个任务是在第一个任务执行结束后的5S才开始执行。这就是多任务的延时问题。若多个定时任务中有一个任务抛异常，那所有任务都无法执行。
+Timer执行周期任务时依赖系统时间。若系统时间发生变化，那Timer执行结果可能也会发生变化。而ScheduledExecutorService基于时间的延迟，并非时间，因此不会由于系统时间的改变发生执行变化。
+综上所述，定时任务要使用ScheduledExecutorService取代Timer。</p></li></ul> <h4 id="任务-runnable"><a href="#任务-runnable" class="header-anchor">#</a> 任务 Runnable</h4> <p>任务分为两类：实现 Runnable 和实现 Callable 的类。两者都可以被ExecutorService执行，但是Runnable任务是没有返回值，而Callable任务有返回值。
+而且Callable的Call方法只能通过ExecutorService的submit方法执行，并返回一个Future，表示任务等待完成的Future。</p> <ul><li>Callable接口类似于Runnable，两者都是为那些其实例可能被另一个线程执行的类设计的。但是 Runnable 不会返回结果，
+并且无法抛出经过检查的异常而Callable又返回结果，而且当获取返回结果时可能会抛出异常。Callable中的call()方法类似Runnable的run()方法，区别同样是有返回值，后者没有。</li> <li>当将一个Callable的对象传递给ExecutorService的submit方法，则该call方法自动在一个线程上执行，并且会返回执行结果Future对象。同样，将Runnable的对象传递给ExecutorService的submit方法，
+则该run方法自动在一个线程上执行，并且会返回执行结果Future对象，但是在该Future对象上调用get方法，将返回null。</li></ul></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2021/1/28 下午8:41:14</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/back/concurrency/ThreadSafeStrategy.html" class="prev">
+        线程安全的策略
+      </a></span> <span class="next"><a href="/back/threadPool/ThreadPool01.html">
+        ThreadPool - 分析-上
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.bb9919a6.js" defer></script><script src="/assets/js/2.062734e7.js" defer></script><script src="/assets/js/29.fbd97713.js" defer></script>
+  </body>
+</html>

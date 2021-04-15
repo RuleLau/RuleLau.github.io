@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>简单工厂模式 | RuleLau&#39;s Blog</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/icon.jpg">
+    <meta name="description" content="我的个人网站">
+    
+    <link rel="preload" href="/assets/css/0.styles.99ba71c7.css" as="style"><link rel="preload" href="/assets/js/app.bb9919a6.js" as="script"><link rel="preload" href="/assets/js/2.062734e7.js" as="script"><link rel="preload" href="/assets/js/17.0a2c827f.js" as="script"><link rel="prefetch" href="/assets/js/10.433b51f5.js"><link rel="prefetch" href="/assets/js/11.830e5532.js"><link rel="prefetch" href="/assets/js/12.85721356.js"><link rel="prefetch" href="/assets/js/13.f8c3fd2d.js"><link rel="prefetch" href="/assets/js/14.fa653c25.js"><link rel="prefetch" href="/assets/js/15.ef76bc62.js"><link rel="prefetch" href="/assets/js/16.2516e7f1.js"><link rel="prefetch" href="/assets/js/18.1cc7adc7.js"><link rel="prefetch" href="/assets/js/19.d2b6da04.js"><link rel="prefetch" href="/assets/js/20.fe2514d7.js"><link rel="prefetch" href="/assets/js/21.dd4a8ef6.js"><link rel="prefetch" href="/assets/js/22.a39a912a.js"><link rel="prefetch" href="/assets/js/23.bc7d0bf9.js"><link rel="prefetch" href="/assets/js/24.40d7b3be.js"><link rel="prefetch" href="/assets/js/25.f81da329.js"><link rel="prefetch" href="/assets/js/26.d1ffbb37.js"><link rel="prefetch" href="/assets/js/27.f9dbe694.js"><link rel="prefetch" href="/assets/js/28.a5585f32.js"><link rel="prefetch" href="/assets/js/29.fbd97713.js"><link rel="prefetch" href="/assets/js/3.7c25579e.js"><link rel="prefetch" href="/assets/js/30.d633d78f.js"><link rel="prefetch" href="/assets/js/31.ec95955c.js"><link rel="prefetch" href="/assets/js/32.392fbf7d.js"><link rel="prefetch" href="/assets/js/33.eb3725da.js"><link rel="prefetch" href="/assets/js/4.fa3d0d1c.js"><link rel="prefetch" href="/assets/js/5.cb6c276b.js"><link rel="prefetch" href="/assets/js/6.8acca1fd.js"><link rel="prefetch" href="/assets/js/7.fca05378.js"><link rel="prefetch" href="/assets/js/8.84b833b0.js"><link rel="prefetch" href="/assets/js/9.ccd83e3e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.99ba71c7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/icon.jpg" alt="RuleLau's Blog" class="logo"> <span class="site-name can-hide">RuleLau's Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>JVM</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Concurrency</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>ThreadPool</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Design Pattern</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/back/design-pattern/abstract-factory.html" class="sidebar-link">抽象工厂模式</a></li><li><a href="/back/design-pattern/simple-factory.html" aria-current="page" class="active sidebar-link">简单工厂模式</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/back/design-pattern/factory-method.html" class="sidebar-link">工厂方法模式</a></li><li><a href="/back/design-pattern/simple-abstract-factory.html" class="sidebar-link">简单工厂+抽象工厂模式</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Distributed-Transaction</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Docker</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Utils</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="简单工厂模式"><a href="#简单工厂模式" class="header-anchor">#</a> 简单工厂模式</h3> <h4 id="定义"><a href="#定义" class="header-anchor">#</a> 定义</h4> <p>实例化对象的时候不再使用 new Object()形式，可以根据用户的选择条件来实例化相关的类。对于客户端来说，
+去除了具体的类的依赖。只需要给出具体实例的描述给工厂，工厂就会自动返回具体的实例对象。
+工厂的意思可以理解为一个兵工厂中，可以生产多种武器，包括：手枪、步枪、狙击枪等。
+但是这些类型的枪又属于枪的子类。如果不采用简单工厂的设计模式，采取最原始的模式就是：
+分别新建三个子类，Pistol（手枪类），Rifle（步枪），Snipe（狙击枪）。它们都有共同的属性，
+例如子弹直径（diameter），射速(shootSpeed)，还有公共的方法shoot（射击）方法等。
+那么就会在三个类中出现重复的属性。当然你会想到新建一个基类Gun（枪类），
+将公共的属性都添加到这个基类中，然后其他的子类就继承这个基类。这样做当然就解决了代码冗余的问题。
+但是这样起不到一个统一管理的目的。用户不知道该去实例化那个对象，将来会不会增加实例化的对象。
+那么到现在就应该考虑用一个单独的类来做创造实例的过程，这就是工厂。</p> <h4 id="具体实现"><a href="#具体实现" class="header-anchor">#</a> 具体实现</h4> <ul><li>先新建一个Gun（枪类）基类：</li></ul> <div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 枪基类
+* @author: rule
+* @date: 2019-06-30 22:45
+**/
+public class Gun {
+
+    /**
+     * 枪名
+     */
+    private String gunName;
+
+    /**
+     * 子弹直径
+     */
+    private double diameter;
+
+    /**
+     * 射速
+     */
+    private double shootSpeed;
+
+    /**
+     * 射击方法
+     */
+    public void Shoot () {
+        System.out.println(&quot;这里所有枪都可以射击&quot;);
+    }
+}
+</code></pre></div><ul><li>分别新建三个枪的子类：Pistol（手枪类）、Rifle（步枪类）、Snipe（狙击枪类）</li></ul> <div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 手枪类
+* @author: rule
+* @date: 2019-06-30 22:54
+**/
+public class Pistol extends Gun {
+
+    @Override
+    public void Shoot() {
+        System.out.println(&quot;这把&quot; + getGunName() + &quot;手枪&quot; + &quot;，子弹直径为&quot; + getDiameter() + &quot;mm，射速为&quot; + getShootSpeed() + &quot;km/s&quot;);
+    }
+}
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 步枪类
+* @author: rule
+* @date: 2019-06-30 22:55
+**/
+public class Rifle extends Gun {
+
+    @Override
+    public void Shoot() {
+        System.out.println(&quot;这把&quot; + getGunName() + &quot;步枪&quot; + &quot;，子弹直径为&quot; + getDiameter() + &quot;mm，射速为&quot; + getShootSpeed() + &quot;km/s&quot;);
+    }
+}
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 狙击枪类
+* @author: rule
+* @date: 2019-06-30 22:55
+**/
+public class Snipe extends Gun {
+
+    @Override
+    public void Shoot() {
+        System.out.println(&quot;这把&quot; + getGunName() + &quot;狙击枪&quot; + &quot;，子弹直径为&quot; + getDiameter() + &quot;mm，射速为&quot; + getShootSpeed() + &quot;km/s&quot;);
+    }
+}
+</code></pre></div><ul><li>新建GunFactory（兵工厂类）</li></ul> <div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 枪工厂
+* @author: rule
+* @date: 2019-06-30 22:51
+**/
+public class GunFactory {
+
+    public static Gun createGun(String  gunName) {
+        Gun gun = null;
+        if (gunName.equals(&quot;Pistol&quot;)) {
+            gun = new Pistol();
+        }else if (gunName.equals(&quot;Rifle&quot;)) {
+            gun = new Rifle();
+        }else if (gunName.equals(&quot;Snipe&quot;)) {
+            gun = new Snipe();
+        }
+        return gun;
+    }
+}
+</code></pre></div><h4 id="简单工厂模式测试"><a href="#简单工厂模式测试" class="header-anchor">#</a> 简单工厂模式测试</h4> <div class="language- extra-class"><pre class="language-text"><code>/**
+* @description: 兵工厂测试类
+* @author: rule
+* @date: 2019-06-30 23:29
+**/
+public class GunFactoryTest {
+
+    public static void main(String[] args) {
+        Gun gun = null;
+        gun = GunFactory.createGun(&quot;Pistol&quot;);
+        gun.setGunName(&quot;沙鹰&quot;);
+        gun.setDiameter(3);
+        gun.setShootSpeed(60);
+        gun.Shoot();
+    }
+}
+</code></pre></div><p><img src="https://i.loli.net/2021/02/12/bwmcH6NEuTnUfAo.png" alt="image.png"></p> <h4 id="优缺点"><a href="#优缺点" class="header-anchor">#</a> 优缺点</h4> <p>根据上述的测试例子，相信大家都对简单工厂模式有了基本的了解，先谈谈它的优缺点：</p> <ol><li>简单工厂使用了java中的继承、封装、多态特性，决定兵工厂的生产什么类型的枪的决定权交到了用户的手中。根据用户自己的需要，生成合适的枪类。</li> <li>模块分明，起到了可维护性。当然，缺点也是存在的，当我需要增加冲锋枪类时，需要新建子类去继承基类，然后再去修改兵工厂中的createGun方法，这其实就使得代码的结构出现了高耦合了，因为我修改一个子类，最坏的情况是要修改自己类和兵工厂的类。
+这样其实也没有做到“高内聚-低耦合”的设计原则。</li></ol></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2021/2/12 下午12:58:44</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/back/design-pattern/abstract-factory.html" class="prev">
+        抽象工厂模式
+      </a></span> <span class="next"><a href="/back/design-pattern/factory-method.html">
+        工厂方法模式
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.bb9919a6.js" defer></script><script src="/assets/js/2.062734e7.js" defer></script><script src="/assets/js/17.0a2c827f.js" defer></script>
+  </body>
+</html>

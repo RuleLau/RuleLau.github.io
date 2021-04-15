@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Spring Cloud Gateway + Oauth2 + SSO搭建微服务的统一认证授权中心 | RuleLau&#39;s Blog</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/icon.jpg">
+    <meta name="description" content="我的个人网站">
+    
+    <link rel="preload" href="/assets/css/0.styles.99ba71c7.css" as="style"><link rel="preload" href="/assets/js/app.bb9919a6.js" as="script"><link rel="preload" href="/assets/js/2.062734e7.js" as="script"><link rel="preload" href="/assets/js/10.433b51f5.js" as="script"><link rel="prefetch" href="/assets/js/11.830e5532.js"><link rel="prefetch" href="/assets/js/12.85721356.js"><link rel="prefetch" href="/assets/js/13.f8c3fd2d.js"><link rel="prefetch" href="/assets/js/14.fa653c25.js"><link rel="prefetch" href="/assets/js/15.ef76bc62.js"><link rel="prefetch" href="/assets/js/16.2516e7f1.js"><link rel="prefetch" href="/assets/js/17.0a2c827f.js"><link rel="prefetch" href="/assets/js/18.1cc7adc7.js"><link rel="prefetch" href="/assets/js/19.d2b6da04.js"><link rel="prefetch" href="/assets/js/20.fe2514d7.js"><link rel="prefetch" href="/assets/js/21.dd4a8ef6.js"><link rel="prefetch" href="/assets/js/22.a39a912a.js"><link rel="prefetch" href="/assets/js/23.bc7d0bf9.js"><link rel="prefetch" href="/assets/js/24.40d7b3be.js"><link rel="prefetch" href="/assets/js/25.f81da329.js"><link rel="prefetch" href="/assets/js/26.d1ffbb37.js"><link rel="prefetch" href="/assets/js/27.f9dbe694.js"><link rel="prefetch" href="/assets/js/28.a5585f32.js"><link rel="prefetch" href="/assets/js/29.fbd97713.js"><link rel="prefetch" href="/assets/js/3.7c25579e.js"><link rel="prefetch" href="/assets/js/30.d633d78f.js"><link rel="prefetch" href="/assets/js/31.ec95955c.js"><link rel="prefetch" href="/assets/js/32.392fbf7d.js"><link rel="prefetch" href="/assets/js/33.eb3725da.js"><link rel="prefetch" href="/assets/js/4.fa3d0d1c.js"><link rel="prefetch" href="/assets/js/5.cb6c276b.js"><link rel="prefetch" href="/assets/js/6.8acca1fd.js"><link rel="prefetch" href="/assets/js/7.fca05378.js"><link rel="prefetch" href="/assets/js/8.84b833b0.js"><link rel="prefetch" href="/assets/js/9.ccd83e3e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.99ba71c7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/icon.jpg" alt="RuleLau's Blog" class="logo"> <span class="site-name can-hide">RuleLau's Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>JVM</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/back/jvm/JMM.html" class="sidebar-link">JVM内存结构</a></li><li><a href="/back/jvm/JVMStructure.html" class="sidebar-link">对象的内存布局</a></li><li><a href="/back/jvm/GCAlgorithm.html" class="sidebar-link">垃圾收集策略与算法</a></li><li><a href="/back/jvm/GC.html" class="sidebar-link">垃圾收集器</a></li><li><a href="/back/jvm/MemoryAllocation.html" class="sidebar-link">内存分配与回收策略</a></li><li><a href="/back/jvm/ClassStructure.html" class="sidebar-link">类文件结构</a></li><li><a href="/back/jvm/ClassLoader.html" class="sidebar-link">类加载</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Concurrency</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>ThreadPool</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Design Pattern</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Distributed-Transaction</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Docker</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Utils</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="spring-cloud-gateway-oauth2-sso搭建微服务的统一认证授权中心"><a href="#spring-cloud-gateway-oauth2-sso搭建微服务的统一认证授权中心" class="header-anchor">#</a> <strong>Spring Cloud Gateway + Oauth2 + SSO搭建微服务的统一认证授权中心</strong></h2> <h3 id="一、简介"><a href="#一、简介" class="header-anchor">#</a> <strong>一、简介</strong></h3> <h4 id="_1-1-spring-cloud-gateway-网关服务"><a href="#_1-1-spring-cloud-gateway-网关服务" class="header-anchor">#</a> 1.1 Spring Cloud Gateway 网关服务</h4> <p>相比大家都应该知道。主要是统一我们的接口请求转发，将我们对其他服务的请求都通过网关进行转发。API网关封装了系统内部架构，为每个客户端提供一个定制的API。它可能还具有其它职责，如身份验证、监控、负载均衡、缓存、请求分片与管理、静态响应处理。API网关方式的核心要点是，所有的客户端和消费端都通过统一的网关接入微服务，在网关层处理所有的非业务功能。网关应当具备以下功能：</p> <ul><li>性能：API高可用，负载均衡，容错机制。</li> <li>安全：权限身份认证、脱敏，流量清洗，后端签名（保证全链路可信调用）,黑名单（非法调用的限制）。</li> <li>日志：日志记录（spainid,traceid）一旦涉及分布式，全链路跟踪必不可少。</li> <li>缓存：数据缓存。</li> <li>监控：记录请求响应数据，api耗时分析，性能监控。</li> <li>限流：流量控制，错峰流控，可以定义多种限流规则。</li> <li>灰度：线上灰度部署，可以减小风险。</li> <li>路由：动态路由规则。</li></ul> <h4 id="_1-2-spring-cloud-gateway的特性"><a href="#_1-2-spring-cloud-gateway的特性" class="header-anchor">#</a> 1.2 Spring Cloud Gateway的特性</h4> <ul><li>基于Spring Framework 5、Project Reactor和Spring Boot 2.0构建</li> <li>能够在任意请求属性上匹配路由</li> <li>predicates（谓词） 和 filters（过滤器）是特定于路由的</li> <li>集成了Hystrix断路器</li> <li>集成了Spring Cloud DiscoveryClient</li> <li>易于编写谓词和过滤器</li> <li>请求速率限制</li> <li>路径重写</li></ul> <p><img src="https://gitee.com/rule-liu/pic/raw/master/img/clipboard.png" alt="img"></p> <p>接下来介绍下Oauth2，这个主要是一种认证思路，可以去搜下阮一峰老师的Oauth2的基础知识，就应该明白了Oauth2 到底是什么。下面说下Oauth2 认证的几种方式，下面会使用授权码的方式进行认证。</p> <h4 id="_1-3-oauth2-认证方式"><a href="#_1-3-oauth2-认证方式" class="header-anchor">#</a> 1.3 Oauth2 认证方式</h4> <p>**1. 授权码（authorization code）方式，指的是第三方应用先申请一个授权码，然后再用该码获取令牌 **。</p> <div class="language- extra-class"><pre class="language-text"><code>https://b.com/oauth/authorize?response_type=code&amp;client_id=CLIENT_ID&amp;redirect_uri=CALLBACK_URL&amp;scope=read
+</code></pre></div><p>大概流程就是A向B 发起上面的请求，然后地址跳转到 <a href="https://b.com/oauth/authorize?response_type=code&amp;client_id=CLIENT_ID&amp;redirect_uri=CALLBACK_URL&amp;scope=read" target="_blank" rel="noopener noreferrer">CALLBACK_URL<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>?code=XXX,然后跳转的页面url后会附带上授权码，然后A拿到授权码，向认证中心请求token（令牌），下面地址就是请求地址。最后得到access_token。拿到 access_token 作为请求的header去请求的url.</p> <div class="language- extra-class"><pre class="language-text"><code>https://b.com/oauth/token?
+ client_id=CLIENT_ID&amp;
+ client_secret=CLIENT_SECRET&amp;
+ grant_type=authorization_code&amp;
+ code=AUTHORIZATION_CODE&amp;
+ redirect_uri=CALLBACK_URL
+</code></pre></div><p><strong>2. 隐藏式（implicit）</strong></p> <p><strong>3. 密码式（password）</strong></p> <p><strong>4. 凭证式（client credentials）</strong></p> <h3 id="二、项目搭建"><a href="#二、项目搭建" class="header-anchor">#</a> 二、项目搭建</h3> <p>接下来就是最重要的项目搭建环节了，首先总体的流程如下图所示</p> <p><img src="https://gitee.com/rule-liu/pic/raw/master/img/%E6%9D%83%E9%99%90%E6%B5%81%E7%A8%8B%E5%9B%BE.png" alt="权限流程图"></p> <p>文件目录如下：该项目是一个聚合项目，下面红色圈出的就是这个项目需要使用到的模块，其余模块不需要理会。</p> <p><img src="https://gitee.com/rule-liu/pic/raw/master/img/image-20210405102631641.png" alt="image-20210405102631641"></p> <h4 id="_1-搭建springcloud-demo-全局依赖"><a href="#_1-搭建springcloud-demo-全局依赖" class="header-anchor">#</a> 1. 搭建springcloud-demo 全局依赖</h4> <div class="language-java extra-class"><pre class="language-java"><code><span class="token operator">&lt;</span><span class="token operator">?</span>xml version<span class="token operator">=</span><span class="token string">&quot;1.0&quot;</span> encoding<span class="token operator">=</span><span class="token string">&quot;UTF-8&quot;</span><span class="token operator">?</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span>project xmlns<span class="token operator">=</span><span class="token string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> xmlns<span class="token operator">:</span>xsi<span class="token operator">=</span><span class="token string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+         xsi<span class="token operator">:</span>schemaLocation<span class="token operator">=</span><span class="token string">&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>modelVersion<span class="token punctuation">&gt;</span></span><span class="token number">4.0</span><span class="token number">.0</span><span class="token operator">&lt;</span><span class="token operator">/</span>modelVersion<span class="token operator">&gt;</span>
+
+    <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>com<span class="token punctuation">.</span>rule<span class="token punctuation">.</span>demo<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>nacos<span class="token operator">-</span>spring<span class="token operator">-</span>cloud<span class="token operator">-</span>demo<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>version<span class="token punctuation">&gt;</span></span><span class="token number">0.0</span><span class="token number">.1</span><span class="token operator">-</span>SNAPSHOT<span class="token operator">&lt;</span><span class="token operator">/</span>version<span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>packaging<span class="token punctuation">&gt;</span></span>pom<span class="token operator">&lt;</span><span class="token operator">/</span>packaging<span class="token operator">&gt;</span>
+
+    <span class="token generics"><span class="token punctuation">&lt;</span>modules<span class="token punctuation">&gt;</span></span>
+        <span class="token generics"><span class="token punctuation">&lt;</span><span class="token keyword">module</span><span class="token punctuation">&gt;</span></span>springcloud<span class="token operator">-</span>common<span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">module</span><span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span><span class="token keyword">module</span><span class="token punctuation">&gt;</span></span>nacos<span class="token operator">-</span>service<span class="token operator">-</span>provider<span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">module</span><span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span><span class="token keyword">module</span><span class="token punctuation">&gt;</span></span>nacos<span class="token operator">-</span>service<span class="token operator">-</span>consumer<span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">module</span><span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span><span class="token keyword">module</span><span class="token punctuation">&gt;</span></span>springcloud<span class="token operator">-</span>gateway<span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">module</span><span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span><span class="token keyword">module</span><span class="token punctuation">&gt;</span></span>springcloud<span class="token operator">-</span>auth<span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">module</span><span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span><span class="token keyword">module</span><span class="token punctuation">&gt;</span></span>oauth<span class="token operator">-</span>client<span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">module</span><span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span><span class="token keyword">module</span><span class="token punctuation">&gt;</span></span>oauth<span class="token operator">-</span>client2<span class="token operator">&lt;</span><span class="token operator">/</span><span class="token keyword">module</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>modules<span class="token operator">&gt;</span>
+
+    <span class="token generics"><span class="token punctuation">&lt;</span>parent<span class="token punctuation">&gt;</span></span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>boot<span class="token operator">-</span>starter<span class="token operator">-</span>parent<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>version<span class="token punctuation">&gt;</span></span><span class="token number">2.3</span><span class="token number">.2</span><span class="token punctuation">.</span>RELEASE<span class="token operator">&lt;</span><span class="token operator">/</span>version<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>relativePath<span class="token operator">/</span><span class="token operator">&gt;</span> <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> lookup parent from repository <span class="token operator">--</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>parent<span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>properties<span class="token punctuation">&gt;</span></span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>java<span class="token punctuation">.</span>version<span class="token punctuation">&gt;</span></span><span class="token number">1.8</span><span class="token operator">&lt;</span><span class="token operator">/</span>java<span class="token punctuation">.</span>version<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>properties<span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>dependencyManagement<span class="token punctuation">&gt;</span></span>
+        <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>springcloud<span class="token operator">--</span><span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>dependencies<span class="token punctuation">&gt;</span></span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+                <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>cloud<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+                <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>cloud<span class="token operator">-</span>dependencies<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+                <span class="token generics"><span class="token punctuation">&lt;</span>version<span class="token punctuation">&gt;</span></span><span class="token class-name">Hoxton</span><span class="token punctuation">.</span>SR5<span class="token operator">&lt;</span><span class="token operator">/</span>version<span class="token operator">&gt;</span>
+                <span class="token generics"><span class="token punctuation">&lt;</span>type<span class="token punctuation">&gt;</span></span>pom<span class="token operator">&lt;</span><span class="token operator">/</span>type<span class="token operator">&gt;</span>
+                <span class="token generics"><span class="token punctuation">&lt;</span>scope<span class="token punctuation">&gt;</span></span><span class="token keyword">import</span><span class="token operator">&lt;</span><span class="token operator">/</span>scope<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>springcloud alibaba<span class="token operator">--</span><span class="token operator">&gt;</span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+                <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>com<span class="token punctuation">.</span>alibaba<span class="token punctuation">.</span>cloud<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+                <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>cloud<span class="token operator">-</span>alibaba<span class="token operator">-</span>dependencies<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+                <span class="token generics"><span class="token punctuation">&lt;</span>version<span class="token punctuation">&gt;</span></span><span class="token number">2.2</span><span class="token number">.1</span><span class="token punctuation">.</span>RELEASE<span class="token operator">&lt;</span><span class="token operator">/</span>version<span class="token operator">&gt;</span>
+                <span class="token generics"><span class="token punctuation">&lt;</span>type<span class="token punctuation">&gt;</span></span>pom<span class="token operator">&lt;</span><span class="token operator">/</span>type<span class="token operator">&gt;</span>
+                <span class="token generics"><span class="token punctuation">&lt;</span>scope<span class="token punctuation">&gt;</span></span><span class="token keyword">import</span><span class="token operator">&lt;</span><span class="token operator">/</span>scope<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>dependencies<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>dependencyManagement<span class="token operator">&gt;</span>
+    <span class="token generics"><span class="token punctuation">&lt;</span>dependencies<span class="token punctuation">&gt;</span></span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>projectlombok<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>lombok<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>version<span class="token punctuation">&gt;</span></span><span class="token number">1.18</span><span class="token number">.18</span><span class="token operator">&lt;</span><span class="token operator">/</span>version<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>com<span class="token punctuation">.</span>alibaba<span class="token punctuation">.</span>cloud<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>cloud<span class="token operator">-</span>starter<span class="token operator">-</span>alibaba<span class="token operator">-</span>nacos<span class="token operator">-</span>config<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>cloud<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>cloud<span class="token operator">-</span>starter<span class="token operator">-</span>openfeign<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>com<span class="token punctuation">.</span>alibaba<span class="token punctuation">.</span>cloud<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>cloud<span class="token operator">-</span>starter<span class="token operator">-</span>alibaba<span class="token operator">-</span>nacos<span class="token operator">-</span>discovery<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>dependency<span class="token punctuation">&gt;</span></span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>groupId<span class="token punctuation">&gt;</span></span>org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token operator">&lt;</span><span class="token operator">/</span>groupId<span class="token operator">&gt;</span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>spring<span class="token operator">-</span>boot<span class="token operator">-</span>starter<span class="token operator">-</span>actuator<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>dependency<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>dependencies<span class="token operator">&gt;</span>
+
+    <span class="token generics"><span class="token punctuation">&lt;</span>build<span class="token punctuation">&gt;</span></span>
+        <span class="token generics"><span class="token punctuation">&lt;</span>plugins<span class="token punctuation">&gt;</span></span>
+            <span class="token generics"><span class="token punctuation">&lt;</span>plugin<span class="token punctuation">&gt;</span></span>
+                <span class="token generics"><span class="token punctuation">&lt;</span>artifactId<span class="token punctuation">&gt;</span></span>maven<span class="token operator">-</span>compiler<span class="token operator">-</span>plugin<span class="token operator">&lt;</span><span class="token operator">/</span>artifactId<span class="token operator">&gt;</span>
+                <span class="token generics"><span class="token punctuation">&lt;</span>configuration<span class="token punctuation">&gt;</span></span>
+                    <span class="token generics"><span class="token punctuation">&lt;</span>source<span class="token punctuation">&gt;</span></span><span class="token number">1.8</span><span class="token operator">&lt;</span><span class="token operator">/</span>source<span class="token operator">&gt;</span>
+                    <span class="token generics"><span class="token punctuation">&lt;</span>target<span class="token punctuation">&gt;</span></span><span class="token number">1.8</span><span class="token operator">&lt;</span><span class="token operator">/</span>target<span class="token operator">&gt;</span>
+                <span class="token operator">&lt;</span><span class="token operator">/</span>configuration<span class="token operator">&gt;</span>
+            <span class="token operator">&lt;</span><span class="token operator">/</span>plugin<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span><span class="token operator">/</span>plugins<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>build<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span><span class="token operator">/</span>project<span class="token operator">&gt;</span>
+</code></pre></div><p>​</p> <h4 id="_2-搭建springcloud-common-这里主要是做数据库连接的配置、redis、nacos配置信息的共用配置-减少后续项目使用相同配置的冗余"><a href="#_2-搭建springcloud-common-这里主要是做数据库连接的配置、redis、nacos配置信息的共用配置-减少后续项目使用相同配置的冗余" class="header-anchor">#</a> 2. 搭建springcloud-common，这里主要是做数据库连接的配置、redis、nacos配置信息的共用配置，减少后续项目使用相同配置的冗余</h4> <p><img src="https://gitee.com/rule-liu/pic/raw/master/img/image-20210405103221977.png" alt="image-20210405103221977"></p> <p><strong>2.1 pom.xml</strong></p> <div class="language- extra-class"><pre class="language-text"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+   &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+   &lt;parent&gt;
+      &lt;groupId&gt;com.rule.demo&lt;/groupId&gt;
+      &lt;artifactId&gt;nacos-spring-cloud-demo&lt;/artifactId&gt;
+      &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+   &lt;/parent&gt;
+   &lt;groupId&gt;com.rule&lt;/groupId&gt;
+   &lt;artifactId&gt;springcloud-common&lt;/artifactId&gt;
+   &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+   &lt;name&gt;springcloud-common&lt;/name&gt;
+   &lt;description&gt;公共组件包&lt;/description&gt;
+   &lt;packaging&gt;jar&lt;/packaging&gt;
+   &lt;properties&gt;
+      &lt;java.version&gt;1.8&lt;/java.version&gt;
+   &lt;/properties&gt;
+   &lt;dependencies&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+         &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+         &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+         &lt;optional&gt;true&lt;/optional&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;mysql&lt;/groupId&gt;
+         &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+         &lt;version&gt;8.0.13&lt;/version&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+         &lt;artifactId&gt;spring-cloud-starter-oauth2&lt;/artifactId&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt;
+         &lt;artifactId&gt;jjwt&lt;/artifactId&gt;
+         &lt;version&gt;0.9.0&lt;/version&gt;
+      &lt;/dependency&gt;
+      &lt;!--mybatis-plus--&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+         &lt;artifactId&gt;mybatis-plus&lt;/artifactId&gt;
+         &lt;version&gt;3.4.2&lt;/version&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+         &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;
+         &lt;version&gt;3.0.5&lt;/version&gt;
+      &lt;/dependency&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+         &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+         &lt;version&gt;2.1.3&lt;/version&gt;
+      &lt;/dependency&gt;
+      &lt;!-- 引入Druid依赖，阿里巴巴所提供的数据源 --&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+         &lt;artifactId&gt;druid&lt;/artifactId&gt;
+         &lt;version&gt;1.1.10&lt;/version&gt;
+      &lt;/dependency&gt;
+      &lt;!--redis--&gt;
+      &lt;dependency&gt;
+         &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+         &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+      &lt;/dependency&gt;
+   &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre></div><h5 id="_2-2-配置全局的tokenstore"><a href="#_2-2-配置全局的tokenstore" class="header-anchor">#</a> 2.2 配置全局的TokenStore</h5> <div class="language- extra-class"><pre class="language-text"><code>@Configuration
+public class JwtTokenStoreConfig {
+
+    /**
+     * 秘钥串
+     */
+    private static final String SIGNING_KEY = &quot;SigningKey&quot;;
+    
+    @Resource
+    private UserMapper userMapper;
+
+    @Bean
+    public TokenStore jwtTokenStore() {
+        return new JwtTokenStore(accessTokenConverter());
+    }
+
+    // JWT
+    @Bean
+    public JwtAccessTokenConverter accessTokenConverter() {
+        JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter() {
+            /***
+             * 重写增强token方法,用于自定义一些token总需要封装的信息
+             */
+            @Override
+            public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
+                String userName = authentication.getUserAuthentication().getName();
+                // 数据库中查询用户信息
+                QueryWrapper&lt;UserInfo&gt; wrapper = new QueryWrapper&lt;&gt;();
+                wrapper.eq(&quot;username&quot;, userName);
+                UserInfo userInfo = userMapper.selectOne(wrapper);
+                // 得到用户名，去处理数据库可以拿到当前用户的信息和角色信息（需要传递到服务中用到的信息）
+                final Map&lt;String, Object&gt; additionalInformation = new HashMap&lt;&gt;();
+                additionalInformation.put(&quot;userInfo&quot;, JSON.toJSONString(userInfo));
+                ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInformation);
+                return super.enhance(accessToken, authentication);
+            }
+        };
+        // 测试用,资源服务使用相同的字符达到一个对称加密的效果,生产时候使用RSA非对称加密方式
+        accessTokenConverter.setSigningKey(SIGNING_KEY);
+        return accessTokenConverter;
+    }
+}
+</code></pre></div><h5 id="_2-3-配置全局的-passwordencoder"><a href="#_2-3-配置全局的-passwordencoder" class="header-anchor">#</a> <strong>2.3 配置全局的 PasswordEncoder</strong></h5> <div class="language- extra-class"><pre class="language-text"><code>@Component
+public class MyPasswordEncoder extends BCryptPasswordEncoder {
+}
+</code></pre></div><p><strong>2.4 登录的用户信息UserInfo</strong></p> <div class="language- extra-class"><pre class="language-text"><code>@Data
+@TableName(value = &quot;t_user&quot;)
+public class UserInfo {
+
+    @TableId(value = &quot;ID&quot;, type = IdType.AUTO)
+    private Integer id;
+
+    /**
+     * 用户名
+     */
+    private String username;
+
+    /**
+     * 密码
+     */
+    private String password;
+
+    /**
+     * 权限
+     */
+    private String authorities;
+}
+</code></pre></div><p><strong>2.5 mapper文件</strong></p> <div class="language- extra-class"><pre class="language-text"><code>@Mapper
+public interface UserMapper extends BaseMapper&lt;UserInfo&gt; {
+}
+</code></pre></div><p><strong>2.6 application-common.yml</strong></p> <div class="language- extra-class"><pre class="language-text"><code>spring:
+  cloud:
+    nacos:
+      config:
+        shared-configs:
+          - data-id: common.yaml
+            refresh: true
+  redis:
+    host: ${redis.host}
+    port: ${redis.port}
+    database: ${redis.database}
+    password: ${redis.password}
+    # 配置数据源
+  datasource:
+    url: ${mysql.datasource.url}
+    username: ${mysql.datasource.username}
+    password: ${mysql.datasource.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      filters: stat
+      maxActive: 20
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+  # mybatis-plus相关配置
+  mybatis-plus:
+    # xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）
+    mapper-locations: classpath:**/*Mapper.xml
+    # 以下配置均有默认值,可以不设置
+    global-config:
+      #主键类型  0:&quot;数据库ID自增&quot;, 1:&quot;用户输入ID&quot;,2:&quot;全局唯一ID (数字类型唯一ID)&quot;, 3:&quot;全局唯一ID UUID&quot;;
+      id-type: 0
+      #字段策略 0:&quot;忽略判断&quot;,1:&quot;非 NULL 判断&quot;),2:&quot;非空判断&quot;
+      field-strategy: 2
+      #驼峰下划线转换
+      db-column-underline: true
+      #刷新mapper 调试神器
+      refresh-mapper: false
+    configuration:
+      # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+      map-underscore-to-camel-case: true
+      cache-enabled: false
+      jdbc-type-for-null: 'null'
+</code></pre></div><p><strong>2.7 bootstrap.properties：配置统一的nacos注册、配置中心地址</strong></p> <div class="language- extra-class"><pre class="language-text"><code>spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848
+spring.cloud.nacos.config.server-addr=127.0.0.1:8848
+spring.cloud.nacos.config.file-extension=yaml
+</code></pre></div><p><strong>2.8 用于网关转发请求后路径失败问题，配置全局cookie：NacosConfig</strong></p> <div class="language- extra-class"><pre class="language-text"><code>@Configuration
+public class NacosConfig {
+
+    /**
+     * 用于改变程序自动获取的本机ip
+     */
+    @Bean
+    @Primary
+    public NacosDiscoveryProperties nacosProperties() {
+        NacosDiscoveryProperties nacosDiscoveryProperties = new NacosDiscoveryProperties();
+        nacosDiscoveryProperties.setIp(&quot;localhost&quot;);
+        return nacosDiscoveryProperties;
+    }
+}
+</code></pre></div><h4 id="_3-搭建springcloud-auth-项目结构图如下"><a href="#_3-搭建springcloud-auth-项目结构图如下" class="header-anchor">#</a> 3. 搭建springcloud-auth：项目结构图如下</h4> <p><img src="https://gitee.com/rule-liu/pic/raw/master/img/image-20210405103647036.png" alt="image-20210405103647036"></p> <p><strong>3.1 依赖文件 pom.xml</strong></p> <div class="language- extra-class"><pre class="language-text"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;com.rule.demo&lt;/groupId&gt;
+        &lt;artifactId&gt;nacos-spring-cloud-demo&lt;/artifactId&gt;
+        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;/parent&gt;
+    &lt;artifactId&gt;springcloud-auth&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;springcloud-auth&lt;/name&gt;
+    &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+    &lt;properties&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.rule&lt;/groupId&gt;
+            &lt;artifactId&gt;springcloud-common&lt;/artifactId&gt;
+            &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre></div><p><strong>3.2 搭建授权中心 AuthorizationServerConfiguration</strong></p> <div class="language- extra-class"><pre class="language-text"><code>/**
+ * 授权服务中心
+ */
+@Configuration
+@EnableAuthorizationServer
+public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    RedisConnectionFactory redisConnectionFactory;
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    private ClientDetailsService clientDetailsService;
+
+    @Autowired
+    @Qualifier(&quot;jwtTokenStore&quot;)
+    private TokenStore jwtTokenStore;
+
+    @Autowired
+    @Qualifier(&quot;accessTokenConverter&quot;)
+    private JwtAccessTokenConverter jwtAccessTokenConverter;
+
+    @Autowired
+    @Qualifier(&quot;userDetailsService&quot;)
+    private UserDetailsService userDetailsService;
+
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.jdbc(dataSource).clients(clientDetailsService);
+    }
+
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+        // userDetailsService 使用refresh_token 时需要
+        endpoints.userDetailsService(userDetailsService)
+                .tokenStore(jwtTokenStore)
+                .accessTokenConverter(jwtAccessTokenConverter)
+                .authenticationManager(authenticationManager);
+    }
+
+    /**
+     * 获取密钥需要身份验证，使用单点登陆时必须配置
+     *
+     * @param security security
+     */
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) {
+        // 使用单点登陆时必须配置
+        security.tokenKeyAccess(&quot;isAuthenticated()&quot;);
+        // 不适用单点
+//        security
+//                .tokenKeyAccess(&quot;permitAll()&quot;)
+//                .checkTokenAccess(&quot;permitAll()&quot;)
+//                .allowFormAuthenticationForClients();
+    }
+
+    @Bean
+    public ClientDetailsService clientDetails() {
+        return new JdbcClientDetailsService(dataSource);
+    }
+
+}
+</code></pre></div><p><strong>3.3 自定义用户登录校验类 DomainUserDetailsService</strong></p> <div class="language- extra-class"><pre class="language-text"><code>@Slf4j
+@Service(&quot;userDetailsService&quot;)
+public class DomainUserDetailsService implements UserDetailsService {
+
+    @Resource
+    private UserMapper userMapper;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // 数据库中查询用户信息
+        QueryWrapper&lt;UserInfo&gt; wrapper = new QueryWrapper&lt;&gt;();
+        wrapper.eq(&quot;username&quot;, username);
+        UserInfo user = userMapper.selectOne(wrapper);
+        if (user == null) {
+            throw new UsernameNotFoundException(&quot;用户&quot; + username + &quot;不存在&quot;);
+        }
+        return new User(user.getUsername(), user.getPassword(),
+                AuthorityUtils.commaSeparatedStringToAuthorityList(user.getAuthorities()));
+    }
+}
+</code></pre></div><p><strong>3.4 资源配置中心 ResourceServerConfig</strong></p> <div class="language- extra-class"><pre class="language-text"><code>/**
+ * 资源服务器配置
+ */
+@Configuration
+@EnableResourceServer
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .requestMatchers()
+                .antMatchers(&quot;/user/**&quot;);
+    }
+
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) {
+        resources.resourceId(&quot;dev&quot;);
+    }
+}
+</code></pre></div><p><strong>3.5 springsecurity 配置类，主要是对路径的放行</strong></p> <div class="language- extra-class"><pre class="language-text"><code>@Configuration
+@EnableWebSecurity
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable()// 禁用跨站攻击
+                .authorizeRequests()
+                .antMatchers(&quot;/oauth/**&quot;, &quot;/login/**&quot;,  &quot;/login.html&quot;,
+                        &quot;/success.html&quot;, &quot;/fail.html&quot;)
+                .permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
+                .loginPage(&quot;/login.html&quot;)
+                .loginProcessingUrl(&quot;/demo-login&quot;)
+                .failureForwardUrl(&quot;/login/fail&quot;)
+                .permitAll();
+    }
+
+    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+}
+</code></pre></div><p><strong>3.6 配置文件 bootstrap.yml, applicaiton.yml 主要配置端口就不展示了</strong></p> <div class="language- extra-class"><pre class="language-text"><code>spring:
+  application:
+    name: springcloud-auth
+  cloud:
+    nacos:
+      config:
+        shared-configs:
+          - data-id: common.yaml
+            refresh: true
+## 引入application-common.yml
+  profiles:
+    include: common
+</code></pre></div><h4 id="_4-搭建oauth-client"><a href="#_4-搭建oauth-client" class="header-anchor">#</a> 4. 搭建oauth-client</h4> <p><img src="https://gitee.com/rule-liu/pic/raw/master/img/image-20210405103852004.png" alt="image-20210405103852004"></p> <p><strong>4.1 依赖文件 pom.xml</strong></p> <div class="language- extra-class"><pre class="language-text"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;com.rule.demo&lt;/groupId&gt;
+        &lt;artifactId&gt;nacos-spring-cloud-demo&lt;/artifactId&gt;
+        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;/parent&gt;
+    &lt;artifactId&gt;springcloud-auth&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;springcloud-auth&lt;/name&gt;
+    &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+    &lt;properties&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.rule&lt;/groupId&gt;
+            &lt;artifactId&gt;springcloud-common&lt;/artifactId&gt;
+            &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre></div><p><strong>4.2 权限过滤中心：AuthenticationFilter，这块可以提出来放到common模块中作为公共的权限过滤</strong></p> <div class="language- extra-class"><pre class="language-text"><code>@Component
+public class AuthenticationFilter extends OncePerRequestFilter {
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
+        String token = request.getHeader(&quot;json-token&quot;);
+        if (StringUtils.isNotBlank(token)) {
+            String json = new String(Base64Utils.decodeFromUrlSafeString(token));
+            JSONObject jsonObject = JSON.parseObject(json);
+            //获取用户身份信息、权限信息
+            String principal = jsonObject.getString(&quot;principal&quot;);
+            JSONArray tempJsonArray = jsonObject.getJSONArray(&quot;authorities&quot;);
+            String[] authorities = tempJsonArray.toArray(new String[0]);
+            //身份信息、权限信息填充到用户身份token对象中
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(principal, null,
+                    AuthorityUtils.createAuthorityList(authorities));
+            //创建details
+            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            //将authenticationToken填充到安全上下文
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        }
+        filterChain.doFilter(request, response);
+    }
+}
+</code></pre></div><p><strong>4.3 资源认证中心：ResourceServerConfig</strong></p> <div class="language- extra-class"><pre class="language-text"><code>@Configuration
+@EnableResourceServer
+public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+
+
+    @Autowired
+    @Qualifier(&quot;jwtTokenStore&quot;)
+    private TokenStore tokenStore;
+
+    /**
+     * 资源ID
+     */
+    private static final String RESOURCE_ID = &quot;dev&quot;;
+
+
+    /**
+     * 资源配置
+     */
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) {
+        resources.resourceId(RESOURCE_ID)
+                .tokenStore(tokenStore)
+                .stateless(true);
+    }
+
+    /**
+     * 请求配置
+     */
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .requestMatchers()
+                .antMatchers(&quot;/user/**&quot;);
+    }
+}
+</code></pre></div><p><strong>4.4 测试类 UserController</strong></p> <div class="language- extra-class"><pre class="language-text"><code>@RequestMapping(&quot;/user&quot;)
+@RestController
+public class UserController {
+
+    @RequestMapping(&quot;/getCurrentUser&quot;)
+    public Object getCurrentUser(Authentication authentication) {
+        return authentication;
+    }
+}
+</code></pre></div><h4 id="_5-springcloud-gateway-作为请求的转发。"><a href="#_5-springcloud-gateway-作为请求的转发。" class="header-anchor">#</a> 5. springcloud Gateway：作为请求的转发。</h4> <p><img src="https://gitee.com/rule-liu/pic/raw/master/img/image-20210405104006613.png" alt="image-20210405104006613"></p> <p><strong>5.1 pom.xml 文件</strong></p> <div class="language- extra-class"><pre class="language-text"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;parent&gt;
+        &lt;groupId&gt;com.rule.demo&lt;/groupId&gt;
+        &lt;artifactId&gt;nacos-spring-cloud-demo&lt;/artifactId&gt;
+        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;/parent&gt;
+    &lt;groupId&gt;com.rule&lt;/groupId&gt;
+    &lt;artifactId&gt;springcloud-gateway&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;name&gt;springcloud-gateway&lt;/name&gt;
+    &lt;description&gt;Project for Spring Boot&lt;/description&gt;
+    &lt;properties&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;/properties&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-gateway&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.rule&lt;/groupId&gt;
+            &lt;artifactId&gt;springcloud-common&lt;/artifactId&gt;
+            &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-webflux&lt;/artifactId&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+                &lt;/exclusion&gt;
+                &lt;exclusion&gt;
+                    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+                    &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre></div><p><strong>5.2 网关跨域配置：GatewayCorsConfiguration</strong></p> <div class="language- extra-class"><pre class="language-text"><code>@Configuration
+public class GatewayCorsConfiguration {
+
+    @Bean
+    public CorsWebFilter corsWebFilter() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedHeader(&quot;*&quot;);
+        corsConfiguration.addAllowedMethod(&quot;*&quot;);
+        corsConfiguration.addAllowedOrigin(&quot;*&quot;);
+        corsConfiguration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration(&quot;/**&quot;, corsConfiguration);
+        return new CorsWebFilter(source);
+    }
+}
+</code></pre></div><p><strong>5.3 网关过滤请求类：GatewayFilterConfig</strong></p> <div class="language- extra-class"><pre class="language-text"><code>@Component
+@Slf4j
+@Order(-1)
+public class GatewayFilterConfig implements GlobalFilter {
+
+    @Autowired
+    @Qualifier(&quot;jwtTokenStore&quot;)
+    private TokenStore tokenStore;
+
+    @Override
+    public Mono&lt;Void&gt; filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        String requestUrl = exchange.getRequest().getPath().value();
+        AntPathMatcher pathMatcher = new AntPathMatcher();
+        //1 认证服务所有放行
+        if (pathMatcher.match(&quot;/oauth/**&quot;, requestUrl)) {
+            return chain.filter(exchange);
+        }
+        //2 检查token是否存在
+        String token = getToken(exchange);
+        if (StringUtils.isBlank(token)) {
+            return noTokenMono(exchange);
+        }
+        //3 判断是否是有效的token
+        OAuth2AccessToken oAuth2AccessToken;
+        try {
+            oAuth2AccessToken = tokenStore.readAccessToken(token);
+            Map&lt;String, Object&gt; additionalInformation = oAuth2AccessToken.getAdditionalInformation();
+            //取出用户身份信息
+            String principal = additionalInformation.get(&quot;user_name&quot;).toString();
+            //获取用户权限
+            List&lt;String&gt; authorities = (List&lt;String&gt;) additionalInformation.get(&quot;authorities&quot;);
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put(&quot;principal&quot;, principal);
+            jsonObject.put(&quot;authorities&quot;, authorities);
+            //给header里面添加值
+            String base64 = Base64Utils.encodeToUrlSafeString(jsonObject.toJSONString().getBytes());
+            ServerHttpRequest tokenRequest = exchange.getRequest().mutate().header(&quot;json-token&quot;, base64).build();
+            ServerWebExchange build = exchange.mutate().request(tokenRequest).build();
+            return chain.filter(build);
+        } catch (InvalidTokenException e) {
+            log.info(&quot;无效的token: {}&quot;, token);
+            return invalidTokenMono(exchange);
+        }
+    }
+
+
+    /**
+     * 获取token
+     */
+    private String getToken(ServerWebExchange exchange) {
+        String tokenStr = exchange.getRequest().getHeaders().getFirst(&quot;Authorization&quot;);
+        if (StringUtils.isBlank(tokenStr)) {
+            return null;
+        }
+        return StringUtils.substring(tokenStr, &quot;Bearer &quot;.length());
+    }
+
+
+    /**
+     * 无效的token
+     */
+    private Mono&lt;Void&gt; invalidTokenMono(ServerWebExchange exchange) {
+        JSONObject json = new JSONObject();
+        json.put(&quot;status&quot;, HttpStatus.UNAUTHORIZED.value());
+        json.put(&quot;data&quot;, &quot;无效的token&quot;);
+        return buildReturnMono(json, exchange);
+    }
+
+    private Mono&lt;Void&gt; noTokenMono(ServerWebExchange exchange) {
+        JSONObject json = new JSONObject();
+        json.put(&quot;status&quot;, HttpStatus.UNAUTHORIZED.value());
+        json.put(&quot;data&quot;, &quot;没有token&quot;);
+        return buildReturnMono(json, exchange);
+    }
+
+
+    private Mono&lt;Void&gt; buildReturnMono(JSONObject json, ServerWebExchange exchange) {
+        ServerHttpResponse response = exchange.getResponse();
+        byte[] bits = json.toJSONString().getBytes(StandardCharsets.UTF_8);
+        DataBuffer buffer = response.bufferFactory().wrap(bits);
+        response.setStatusCode(HttpStatus.UNAUTHORIZED);
+        //指定编码，否则在浏览器中会中文乱码
+        response.getHeaders().add(&quot;Content-Type&quot;, &quot;text/plain;charset=UTF-8&quot;);
+        return response.writeWith(Mono.just(buffer));
+    }
+</code></pre></div><p><strong>5.4 Spring Security 配置 Security Config</strong></p> <div class="language- extra-class"><pre class="language-text"><code>@EnableWebFluxSecurity
+@Configuration
+public class SecurityConfig {
+
+    @Bean
+    public SecurityWebFilterChain webFluxSecurityFilterChain(ServerHttpSecurity http) {
+        return http.authorizeExchange()
+                .pathMatchers(&quot;/**&quot;).permitAll()
+                .anyExchange().authenticated()
+                .and().csrf().disable().build();
+    }
+}
+</code></pre></div><p><strong>5.5 bootstrap.yml：服务的转发地址等配置信息</strong></p> <div class="language- extra-class"><pre class="language-text"><code>spring:
+  application:
+    name: gateway
+  profiles:
+    include: common
+  cloud:
+    nacos:
+      config:
+        shared-configs:
+          - data-id: common.yaml
+            refresh: true
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: provider-router
+        uri: lb://nacos-service-provider
+        predicates:
+          - Path=/config/**
+      - id: oauth-client
+        uri: lb://oauth-client
+        predicates:
+          - Path=/oauth-client/**
+      - id: springcloud-auth
+        uri: lb://springcloud-auth
+        predicates:
+          - Path=/auth/**
+        ### StripPrefix参数表示在将请求发送到下游之前从请求中剥离的路径个数。
+        filters:
+          - StripPrefix=1
+</code></pre></div><h3 id="三、测试"><a href="#三、测试" class="header-anchor">#</a> 三、测试</h3> <p>上述的项目已经搭建好了，接下来就来测试一下。主要的流程是：认证中心获取授权码-》获取token-》获取资源，上述的一系列操作都是通过网关进行转发。启动项目</p> <p><img src="https://gitee.com/rule-liu/pic/raw/master/img/image-20210405104316640.png" alt="image-20210405104316640"></p> <p><img src="https://gitee.com/rule-liu/pic/raw/master/img/image-20210405104330682.png" alt="image-20210405104330682"></p> <h4 id="_1-获取授权码"><a href="#_1-获取授权码" class="header-anchor">#</a> 1. 获取授权码</h4> <p>http://localhost:9000/oauth/authorize?response_type=code&amp;client_id=oauth-client&amp;redirect_uri=http://localhost:9001/login，然后输入账号密码获取到code。</p> <p><img src="https://gitee.com/rule-liu/pic/raw/master/img/image-20210405104426351.png" alt="image-20210405104426351"></p> <h4 id="_2-获取token"><a href="#_2-获取token" class="header-anchor">#</a> 2. 获取token</h4> <p><img src="https://gitee.com/rule-liu/pic/raw/master/img/image-20210405104445238.png" alt="image-20210405104445238"></p> <p><img src="https://gitee.com/rule-liu/pic/raw/master/img/image-20210405104458420.png" alt="image-20210405104458420"></p> <h4 id="_3-拿到token去访问-oauth-client服务-得到结果"><a href="#_3-拿到token去访问-oauth-client服务-得到结果" class="header-anchor">#</a> 3. 拿到token去访问，oauth-client服务，得到结果</h4> <p><img src="https://gitee.com/rule-liu/pic/raw/master/img/image-20210405104541323.png" alt="image-20210405104541323"></p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2021/4/15 下午8:25:31</span></div></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.bb9919a6.js" defer></script><script src="/assets/js/2.062734e7.js" defer></script><script src="/assets/js/10.433b51f5.js" defer></script>
+  </body>
+</html>

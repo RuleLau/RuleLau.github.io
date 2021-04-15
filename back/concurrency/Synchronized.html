@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>synchronized | RuleLau&#39;s Blog</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/icon.jpg">
+    <meta name="description" content="我的个人网站">
+    
+    <link rel="preload" href="/assets/css/0.styles.99ba71c7.css" as="style"><link rel="preload" href="/assets/js/app.bb9919a6.js" as="script"><link rel="preload" href="/assets/js/2.062734e7.js" as="script"><link rel="preload" href="/assets/js/11.830e5532.js" as="script"><link rel="prefetch" href="/assets/js/10.433b51f5.js"><link rel="prefetch" href="/assets/js/12.85721356.js"><link rel="prefetch" href="/assets/js/13.f8c3fd2d.js"><link rel="prefetch" href="/assets/js/14.fa653c25.js"><link rel="prefetch" href="/assets/js/15.ef76bc62.js"><link rel="prefetch" href="/assets/js/16.2516e7f1.js"><link rel="prefetch" href="/assets/js/17.0a2c827f.js"><link rel="prefetch" href="/assets/js/18.1cc7adc7.js"><link rel="prefetch" href="/assets/js/19.d2b6da04.js"><link rel="prefetch" href="/assets/js/20.fe2514d7.js"><link rel="prefetch" href="/assets/js/21.dd4a8ef6.js"><link rel="prefetch" href="/assets/js/22.a39a912a.js"><link rel="prefetch" href="/assets/js/23.bc7d0bf9.js"><link rel="prefetch" href="/assets/js/24.40d7b3be.js"><link rel="prefetch" href="/assets/js/25.f81da329.js"><link rel="prefetch" href="/assets/js/26.d1ffbb37.js"><link rel="prefetch" href="/assets/js/27.f9dbe694.js"><link rel="prefetch" href="/assets/js/28.a5585f32.js"><link rel="prefetch" href="/assets/js/29.fbd97713.js"><link rel="prefetch" href="/assets/js/3.7c25579e.js"><link rel="prefetch" href="/assets/js/30.d633d78f.js"><link rel="prefetch" href="/assets/js/31.ec95955c.js"><link rel="prefetch" href="/assets/js/32.392fbf7d.js"><link rel="prefetch" href="/assets/js/33.eb3725da.js"><link rel="prefetch" href="/assets/js/4.fa3d0d1c.js"><link rel="prefetch" href="/assets/js/5.cb6c276b.js"><link rel="prefetch" href="/assets/js/6.8acca1fd.js"><link rel="prefetch" href="/assets/js/7.fca05378.js"><link rel="prefetch" href="/assets/js/8.84b833b0.js"><link rel="prefetch" href="/assets/js/9.ccd83e3e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.99ba71c7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/icon.jpg" alt="RuleLau's Blog" class="logo"> <span class="site-name can-hide">RuleLau's Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>JVM</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Concurrency</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/back/concurrency/Volatile.html" class="sidebar-link">volatile</a></li><li><a href="/back/concurrency/Synchronized.html" aria-current="page" class="active sidebar-link">synchronized</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/back/concurrency/ThreadSafeStrategy.html" class="sidebar-link">线程安全的策略</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>ThreadPool</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Design Pattern</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Distributed-Transaction</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Docker</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Utils</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="synchronized"><a href="#synchronized" class="header-anchor">#</a> synchronized</h3> <p>synchronized关键字是jvm提供的一个用于并发加锁的关键字，主要用来是解决多线程导致的数据不正确的场景</p> <h4 id="主要形式"><a href="#主要形式" class="header-anchor">#</a> 主要形式</h4> <ol><li>普通同步方法，锁的是当前实例对象；
+<ul><li>加在对象方法前，锁住整个方法</li></ul> <div class="language- extra-class"><pre class="language-text"><code> private synchronized void syncMethod() throws Exception {
+     for (int i = 0; i &lt; 50; i++){
+         count++;
+         Thread.sleep(50);
+         System.out.println(Thread.currentThread().getName() + &quot;:&quot; + count);
+     }
+ }
+</code></pre></div>这种使用方法，主要是用来锁住同一对象的，假设现在有两个不同的对象，调用这个方法，那么关键字synchornized关键字不会起到作用</li> <li>静态同步方法，锁的是当前类的class对象；
+<ul><li>synchronized关键字加在类方法前：因为synchronized加在类方法前，代表的意思是锁住整个类。
+在不同的线程中，调用同步方法是互斥的。</li></ul> <div class="language- extra-class"><pre class="language-text"><code>   private static synchronized void syncStaticMethod1() throws Exception {
+       for (int i = 0; i &lt; 50; i++){
+           count++;
+           Thread.sleep(50);
+           System.out.println(Thread.currentThread().getName() + &quot;1:&quot; + count);
+       }
+   }
+</code></pre></div></li> <li>同步方法块，锁的是Synchorinezd括号里配置的对象,可以是实例对象也可以是类对象；</li></ol> <h4 id="原理"><a href="#原理" class="header-anchor">#</a> 原理</h4> <p>在synchronized在JVM中的实现原理是，基于进入和退出Monitor对象来实现方法同步和代码块同步。代码块同步使用的是
+monitorenter和monitorexit指令实现。
+<img src="https://i.loli.net/2021/01/25/y1KmFSlkujeN5D6.png" alt="image.png"></p> <h4 id="锁的升级"><a href="#锁的升级" class="header-anchor">#</a> 锁的升级</h4> <p>锁一共有4种状态，从低到高是：无锁状态、偏向锁状态、轻量级锁状态和重量级锁状态，锁只能进行进行升级，不能降级。</p> <ul><li><p>偏向锁状态
+<img src="https://i.loli.net/2021/01/25/wEelpPYSO68NiCm.png" alt="image.png"></p> <ul><li>撤销偏向锁
+<img src="https://i.loli.net/2021/01/25/j24Phz6kcpMr3d8.png" alt="image.png"></li></ul></li> <li><p>轻量级锁
+自旋定义：在两个线程同时获取锁时，线程1和线程2就存在竞争，那么当前线程1就会采用等待线程2释放锁，然后再去获取锁。当前自旋的时候，
+需要设置限度。不然就会导致线程1一直等待，占用CPU。如果超过时间没有获取到，那么就会将线程1挂起。</p> <ul><li><p>轻量级锁加锁
+<img src="https://i.loli.net/2021/01/25/p1GLatBFZ6kbjRo.png" alt="image.png"></p></li> <li><p>轻量级锁解锁
+使用原子的CAS操作将Displaced Mark Word替换为原对象头，如果成功，则表示没有竞争发生。如果失败，表示当前锁存在竞争。锁就会膨胀为重量级锁。</p></li></ul></li> <li><p>重量级锁
+阻塞线程，等待释放，再重新获取锁</p></li></ul> <h4 id="锁对比"><a href="#锁对比" class="header-anchor">#</a> 锁对比</h4> <p><img src="https://i.loli.net/2021/01/25/HKhRxgUpzbD3dZ9.png" alt="image.png"></p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2021/1/29 上午7:42:17</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/back/concurrency/Volatile.html" class="prev">
+        volatile
+      </a></span> <span class="next"><a href="/back/concurrency/ThreadSafeStrategy.html">
+        线程安全的策略
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.bb9919a6.js" defer></script><script src="/assets/js/2.062734e7.js" defer></script><script src="/assets/js/11.830e5532.js" defer></script>
+  </body>
+</html>

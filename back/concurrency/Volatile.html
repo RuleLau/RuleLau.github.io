@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>volatile | RuleLau&#39;s Blog</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/icon.jpg">
+    <meta name="description" content="我的个人网站">
+    
+    <link rel="preload" href="/assets/css/0.styles.99ba71c7.css" as="style"><link rel="preload" href="/assets/js/app.bb9919a6.js" as="script"><link rel="preload" href="/assets/js/2.062734e7.js" as="script"><link rel="preload" href="/assets/js/13.f8c3fd2d.js" as="script"><link rel="prefetch" href="/assets/js/10.433b51f5.js"><link rel="prefetch" href="/assets/js/11.830e5532.js"><link rel="prefetch" href="/assets/js/12.85721356.js"><link rel="prefetch" href="/assets/js/14.fa653c25.js"><link rel="prefetch" href="/assets/js/15.ef76bc62.js"><link rel="prefetch" href="/assets/js/16.2516e7f1.js"><link rel="prefetch" href="/assets/js/17.0a2c827f.js"><link rel="prefetch" href="/assets/js/18.1cc7adc7.js"><link rel="prefetch" href="/assets/js/19.d2b6da04.js"><link rel="prefetch" href="/assets/js/20.fe2514d7.js"><link rel="prefetch" href="/assets/js/21.dd4a8ef6.js"><link rel="prefetch" href="/assets/js/22.a39a912a.js"><link rel="prefetch" href="/assets/js/23.bc7d0bf9.js"><link rel="prefetch" href="/assets/js/24.40d7b3be.js"><link rel="prefetch" href="/assets/js/25.f81da329.js"><link rel="prefetch" href="/assets/js/26.d1ffbb37.js"><link rel="prefetch" href="/assets/js/27.f9dbe694.js"><link rel="prefetch" href="/assets/js/28.a5585f32.js"><link rel="prefetch" href="/assets/js/29.fbd97713.js"><link rel="prefetch" href="/assets/js/3.7c25579e.js"><link rel="prefetch" href="/assets/js/30.d633d78f.js"><link rel="prefetch" href="/assets/js/31.ec95955c.js"><link rel="prefetch" href="/assets/js/32.392fbf7d.js"><link rel="prefetch" href="/assets/js/33.eb3725da.js"><link rel="prefetch" href="/assets/js/4.fa3d0d1c.js"><link rel="prefetch" href="/assets/js/5.cb6c276b.js"><link rel="prefetch" href="/assets/js/6.8acca1fd.js"><link rel="prefetch" href="/assets/js/7.fca05378.js"><link rel="prefetch" href="/assets/js/8.84b833b0.js"><link rel="prefetch" href="/assets/js/9.ccd83e3e.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.99ba71c7.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/icon.jpg" alt="RuleLau's Blog" class="logo"> <span class="site-name can-hide">RuleLau's Blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/back/" class="nav-link router-link-active">
+  后端
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>JVM</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>Concurrency</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/back/concurrency/Volatile.html" aria-current="page" class="active sidebar-link">volatile</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/back/concurrency/Synchronized.html" class="sidebar-link">synchronized</a></li><li><a href="/back/concurrency/ThreadSafeStrategy.html" class="sidebar-link">线程安全的策略</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>ThreadPool</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Design Pattern</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Distributed-Transaction</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Docker</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Utils</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="volatile"><a href="#volatile" class="header-anchor">#</a> volatile</h3> <p>volatile是轻量级的synchronized, 它在多处理器开发中保证了共享变量的可见性，有序性。
+可见性的意思是：当一个线程修改一个共享变量时，另外一个线程能读到这个修改的值。
+有序性的意思是：当JVM对字节码进行重排序时，遇到volatile修饰的变量，会保证这个变量之前的代码一定会比它先执行，而之后的代码一定会比它慢执行。
+“观察加入volatile关键字和没有加入volatile关键字时所生成的汇编代码发现，加入volatile关键字时，会多出一个lock前缀指令”
+lock前缀指令实际上相当于一个内存屏障（也成内存栅栏），内存屏障会提供3个功能：</p> <ol><li>它确保指令重排序时不会把其后面的指令排到内存屏障之前的位置，也不会把前面的指令排到内存屏障的后面；
+即在执行到内存屏障这句指令时，在它前面的操作已经全部完成；</li> <li>它会强制将对缓存的修改操作立即写入主存；</li> <li>如果是写操作，它会导致其他CPU中对应的缓存行无效。</li></ol> <blockquote><p>内存屏障是个CPU指令,Java内存模型中volatile变量就是通过在写操作之后会插入一个store屏障，在读操作之前会插入一个load屏障，来实现的“禁止指令重排序”</p></blockquote> <p>volatile不具备原子性，所以volatile不是线程安全的。当两个线程同时访问counter这个共享资源，每一个都先从主存读取的是counter=0，那么现在线程1和线程2现在同时访问counter，
+进行值计算，那么期望得到是值则是2，但是现在这种情况，就会导致两个线程从cpu缓存中，会写到主存中时，就可能会是1。这样就导致了线程不安全的问题。</p> <p><img src="https://i.loli.net/2021/01/25/Q49Aunp3meLTi5w.png" alt="image.png"></p> <h4 id="原子性"><a href="#原子性" class="header-anchor">#</a> 原子性</h4> <p>由于volatile关键字不具备原子性，那么首先看下原子性的定义：不可被中断的一个或一系列操作。</p> <h4 id="实现原子性"><a href="#实现原子性" class="header-anchor">#</a> 实现原子性</h4> <ul><li>处理器实现原子操作：总线加锁或缓存加锁。</li> <li>总线加锁：处理器提供一个LOCK信号，当一个处理器在总线上输出此信号时，其他处理器的请求将被阻塞，那么该处理器可以独占共享内存。</li> <li>缓存加锁：内存区域如果被缓存在处理器的缓存行中，并且在Lock操作期间被锁定，那么当它执行锁操作回写到内存时，处理器不在总线上使用LOCK信号，
+而是修改内部的内存地址，并允许它的缓存一致性机制来保证操作的原子性。</li></ul> <h5 id="情景"><a href="#情景" class="header-anchor">#</a> 情景：</h5> <ol><li>当操作的数据不能被缓存在处理器内部，或操作的数据跨多个缓存行时，处理器会调用总线锁定。</li> <li>处理器不支持缓存锁定时，会调用总线锁定。</li></ol> <ul><li><p>CAS实现原子操作</p></li> <li><p>ABA问题，因为CAS在操作值时，会去检查值的变化，如果没有变化则更新，但是一个值是A，变成了B，再变成A，那么CAS检查时，会发现值没有变化。
+解决的思路是使用版本号，在变量前面追加版本号，例如A1-B2-A3，那么现在CAS就会检查到值的变化了,JDK提供了一个类AtomicStampedReference来解决ABA问题。
+下图则是CAS的算法定义，首先检查当前引用是否等于预期引用，并且检查当前标志是否等于预期标志，如果全部相等，原子方式将该引用和该标志的值设置为给定的更新值。
+<img src="https://i.loli.net/2021/01/25/vaQLscf58w9pADu.png" alt="image.png"></p></li> <li><p>循环时间长开销大
+在执行CAS操作时，会进行自旋操作，如果当前引用和预期值没有一致，那么就会一致循环进行检查，会给CPU带来非常大的执行开销。</p></li> <li><p>只能保证一个共享变量的原子操作
+对于多个共享变量时，循环CAS无法保证操作的原子性，这个时候就可以用锁。当前也可以使用AtomicReference类来保证引用对象之间的原子性，可以把多个变量放在一个对象
+里进行CAS操作。</p></li></ul></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2021/1/29 上午7:42:17</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/back/jvm/ClassLoader.html" class="prev">
+        类加载
+      </a></span> <span class="next"><a href="/back/concurrency/Synchronized.html">
+        synchronized
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.bb9919a6.js" defer></script><script src="/assets/js/2.062734e7.js" defer></script><script src="/assets/js/13.f8c3fd2d.js" defer></script>
+  </body>
+</html>
